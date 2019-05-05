@@ -1,0 +1,56 @@
+defaultKey:
+   UPLOAD_DIRECTORY: docs/resume
+
+
+spring:
+  # 模板消息配置
+  thymeleaf:
+    cache: false
+    enabled: true
+    encoding: UTF-8
+    perfix: classpath:/templates
+
+  # 静态文件配置
+  resources:
+  mvc:
+    static-locations: classpath:/templates
+    static-path-pattern: /static/**
+
+  # redis配置
+  redis:
+      database: 0
+      host: localhost
+      password:
+      port: 6379
+      jedis:
+        pool:
+          max-active: 8
+          max-wait: -1
+          max-idle: 8
+          min-idle: 0
+
+  # mysql数据库配置连接
+  datasource:
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      url: jdbc:mysql://localhost:3306/mywebsites?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      username: root
+      password:
+  jpa:
+      hibernate:
+        ddl-auto: update
+      show-sql: true
+
+# 日志配置
+logging:
+  level:
+    cn:
+      newtol: debug
+  path: markdownLog
+  pattern:
+    file: "%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} ==== %msg%n"
+    console: "%d{yyyy-MM-dd} [%thread] %-5level %logger{50} - %msg%n"
+
+
+server:
+  port: 9090
+

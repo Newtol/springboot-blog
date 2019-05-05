@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>mkToHtmlDemo</title>
+
+    <!--引入样式文件-->
+    <link rel="stylesheet" href="../static/css/style.css" />
+    <link rel="stylesheet" href="../static/css/editormd.preview.css" />
+
+    <!--引入js文件-->
+    <script src="../static/js/editor/jquery.min.js"></script>
+    <script src="../static/js/editor/marked.min.js"></script>
+    <script src="../static/js/editor/prettify.min.js"></script>
+    <script src="../static/js/editor/raphael.min.js"></script>
+    <script src="../static/js/editor/underscore.min.js"></script>
+    <script src="../static/js/editor/sequence-diagram.min.js"></script>
+    <script src="../static/js/editor/flowchart.min.js"></script>
+    <script src="../static/js/editor/jquery.flowchart.min.js"></script>
+    <script src="../static/js/editor/editormd.js"></script>
+
+    <!--转pdf引用文件-->
+    <script src="../static/js/pdf/jspdf.debug.js"></script>
+    <script src="../static/js/pdf/html2canvas.js"></script>
+
+
+</head>
+
+<body>
+
+<!--在该div中展示,如有初始化的数据可以放在textarea中-->
+<div id="testEditorMdview">
+    <textarea id="appendTest" style="display:none;"></textarea>
+</div>
+
+<button id="btn-html2canvas" onclick="htmlToPdf()">export PDF by using jspdf + html2canvas</button>
+
+
+
+
+<script type="text/javascript">
+    var content;
+    $(function () {
+        $.ajax({
+            url:'http://localhost:9090/editor/getTemplateResume/9F9E8CF0BAF619BA356CF5192B944797',
+            dataType:'json',
+            async: false,
+            success:function(json){
+                content = json.data;
+            }
+        });
+    })
+
+    //markDown转HTMl的方法
+    $(function mdToHml(){
+        //先对容器初始化，在需要展示的容器中创建textarea隐藏标签，
+        $("#testEditorMdview").html('<textarea id="appendTest" style="display:none;"></textarea>');
+        //获取需要转换的内容
+        //将需要转换的内容加到转换后展示容器的textarea隐藏标签中
+        $("#appendTest").val(content);
+        //转换开始,第一个参数是上面的div的id
+        editormd.markdownToHTML("testEditorMdview", {
+            htmlDecode: "style,script,iframe", //可以过滤标签解码
+            emoji: true,
+            taskList:true,
+            tex: true,               // 默认不解析
+            flowChart:true,         // 默认不解析
+            sequenceDiagram:true,  // 默认不解析
+        });
+    })
+
+    function htmlToPdf() {
+        html2canvas(document.getElementById("testEditorMdview"), {
+            onrendered:function(canvas) {
+
+                var contentWidth = canvas.width;
+                var contentHeight = canvas.height;
+
+                //一页pdf显示html页面生成的canvas高度;
+                var pageHeight = contentWidth / 592.28 * 841.89;
+                //未生成pdf的html页面高度
+                var leftHeight = contentHeight;
+                //页面偏移
+                var position = 0;
+                //a4纸的尺寸[595.28,841.89]，html页面生成的canvas在pdf中图片的宽高
+                var imgWidth = 595.28;
+                var imgHeight = 592.28/contentWidth * contentHeight;
+
+                var pageData = canvas.toDataURL('image/jpeg', 1.0);
+
+                var pdf = new jsPDF('', 'pt', 'a4');
+
+                //有两个高度需要区分，一个是html页面的实际高度，和生成pdf的页面高度(841.89)
+                //当内容未超过pdf一页显示的范围，无需分页
+                if (leftHeight < pageHeight) {
+                    pdf.addImage(pageData, 'JPEG', 0, 0, imgWidth, imgHeight );
+                } else {
+                    while(leftHeight > 0) {
+                        pdf.addImage(pageData, 'JPEG', 0, position, imgWidth, imgHeight)
+                        leftHeight -= pageHeight;
+                        position -= 841.89;
+                        //避免添加空白页
+                        if(leftHeight > 0) {
+                            pdf.addPage();
+                        }
+                    }
+                }
+                pdf.save('content.pdf');
+            }
+        })
+    }
+</script>
+</body>
+</html>
