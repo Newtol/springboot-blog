@@ -44,4 +44,10 @@ public interface ResumeService {
      * @return
      */
     String downloadResumeAsPdf(String fileUrl) throws Exception;
+
+    /**
+     * 得到所有的模板简历
+     * @return 返回简历类型ResumeTpe、模板简历ID
+     */
+    ResultVO getResumeTemplateTypeList();
 }

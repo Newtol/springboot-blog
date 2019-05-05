@@ -29,7 +29,7 @@ public class EditorController {
      * @return 返回简历编辑页面
      */
     @GetMapping("/editor")
-    public String getEditor(@RequestParam String resumeId){
+    public String getEditor(){
         return "editor";
     }
 
@@ -81,6 +81,12 @@ public class EditorController {
     @ResponseBody
     public ResultVO add(@Valid ResumeTemplate resumeTemplate){
         return resumeService.addResumeTemplate(resumeTemplate);
+    }
+
+    @GetMapping("resumeTemplate/lists")
+    @ResponseBody
+    public ResultVO getResumeTemplateTypeList(){
+        return resumeService.getResumeTemplateTypeList();
     }
 
 }

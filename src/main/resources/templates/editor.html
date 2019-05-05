@@ -31,6 +31,8 @@
     <form name="myForm" id = "myForm"method="post" action="http://localhost:9090/editor/myResume">
         <div style="width:90%;margin: 10px auto;">
             <input type="text"  name="title" placeholder="请输入标题" style="width: 85%;padding: 6px;border-radius: 4px">
+            <select name="resumeType" id = "resumeType" style="width: 10%;border-radius: 4px;padding: 6px">
+            </select>
             <input type="button" value="下载" onclick="downloadPdf()"  style="width: 10%;padding: 5px;background-color: #FFF0F5;border-radius: 8px;">
         </div>
         <div id="editor-md"  style="width: 90%; height: 640px;"  >
@@ -46,35 +48,57 @@
 
 </script>
 <script type="text/javascript">
-    var resumeId = getQueryString("resumeId");
     var testEditor;
-    var result ;
-//    获取模板内容
+    var result = "niaho";
+    // 加载模板简历类型
     $(function () {
         $.ajax({
-            url:'http://localhost:9090/editor/getTemplateResume/'+resumeId,
+            url:'/resumeTemplate/lists',
             dataType:'json',
             async: false,
-
             success:function(json){
-                result = json;
+                var sl = document.getElementById("resumeType");
+                var b = json.data;
+                for (var i in b) {
+                    sl.options.add(new Option(b[i].resume_type,b[i].resume_id));
+                }
             }
         });
     })
-//    加载编辑器
+
+    //  加载编辑器
     $(function() {
-        testEditor = editormd("editor-md", {
-            width   : "90%",
-            height  : 640,
-            syncScrolling : "single",
-            path    : "../static/lib/",
-            onload : function() {
-                this.setMarkdown(result.data);
-                $("#loading").remove();
-            }
+        getTemplate();
+        // 当选择模板简历后，重新加载编辑器
+        $("#resumeType").change(function(){
+            getTemplate();
         });
+        
+        function getTemplate() {
+            var resumeId=$("#resumeType").val();
+            $.ajax({
+                url:'http://localhost:9090/editor/getTemplateResume/'+resumeId,
+                dataType:'json',
+                async: false,
+                success:function(json){
+                    result=json.data;
+                }
+            });
+            testEditor = editormd("editor-md", {
+                width   : "90%",
+                height  : 640,
+                syncScrolling : "single",
+                path    : "../static/lib/",
+                onload : function() {
+                    $("#loading").remove();
+                    this.setMarkdown(result);
+
+                }
+            });
+        }
+
     });
-//    下载pdf
+    //    下载pdf
     function downloadPdf() {
         $.ajax({
             //几个参数需要注意一下
@@ -83,7 +107,6 @@
             url: "http://localhost:9090/editor/myResume" ,//url
             data: $('#myForm').serialize(),
             beforeSend:function(){
-//                $("#loading").html("<img src='../static/images/loading.gif' />"); //在请求后台数据之前显示loading图标
                 $("<div id=\"loading\"></div>").appendTo("body");
             },
             success: function (result) {
@@ -99,13 +122,8 @@
             }
         });
     }
-
-    function getQueryString(name) {
-        var reg = new RegExp("(^|&)" + name + "=([^&]*)(&|$)", "i");
-        var r = window.location.search.substr(1).match(reg);
-        if (r != null) return unescape(r[2]); return null;
-    }
-
 </script>
 </body>
 </html>
+
+

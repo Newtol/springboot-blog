@@ -101,4 +101,10 @@ public class ResumeServiceImpl implements ResumeService {
         // 返回pdf文件地址
         return httpClientResult.getContent();
     }
+
+    @Override
+    public ResultVO getResumeTemplateTypeList() {
+        return  ResultUtil.success(resumeTemplateRepository.getResumeTemplateTypeList());
+
+    }
 }

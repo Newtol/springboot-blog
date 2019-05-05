@@ -12,11 +12,7 @@
     <form name="myForm" method="post" action="http://localhost:9090/addResumeTemplate">
         <div style="width:90%;margin: 10px auto;">
             <input type="text"  name="resumeName" placeholder="请输入标题" style="width: 75%;padding: 6px;border-radius: 4px">
-            <select name="resumeType" style="width: 10%;border-radius: 4px;padding: 6px">
-                <option value ="Java">Java</option>
-                <option value ="PHP">PHP</option>
-                <option value="C">C</option>
-                <option value="前端">前端</option>
+            <select name="resumeType" id = "resumeType" style="width: 10%;border-radius: 4px;padding: 6px">
             </select>
             <input type="submit" name="submit" value="提交表单 Submit" style=";width:10%;padding: 5px;background-color: #FFF0F5;border-radius: 8px;">
         </div>
@@ -29,6 +25,27 @@
 <script src="../static/js/editor/editormd.min.js"></script>
 <script type="text/javascript">
     var testEditor;
+    $(function () {
+        $.ajax({
+            url:'/resumeTemplate/lists',
+            dataType:'json',
+            async: false,
+            success:function(json){
+                var sl = document.getElementById("resumeType");
+                var b = json.data;
+                for (var i in b) {
+                    sl.options.add(new Option(b[i].resume_type),b[i].resume_id);
+//            alert(b[i].resume_id);
+                }
+            }
+        });
+
+
+
+
+//        var op = new Option("nihao","sjima");
+
+    })
     $(function() {
         testEditor = editormd("editor-md", {
             width   : "90%",
