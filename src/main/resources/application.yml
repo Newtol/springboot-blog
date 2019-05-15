@@ -3,18 +3,17 @@ defaultKey:
 
 
 spring:
+
   # 模板消息配置
   thymeleaf:
     cache: false
     enabled: true
     encoding: UTF-8
-    perfix: classpath:/templates
-
-  # 静态文件配置
-  resources:
   mvc:
-    static-locations: classpath:/templates
     static-path-pattern: /static/**
+    favicon:
+      enabled: false
+
 
   # redis配置
   redis:
@@ -39,6 +38,12 @@ spring:
       hibernate:
         ddl-auto: update
       show-sql: true
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
+
+
 
 # 日志配置
 logging:
@@ -52,5 +57,5 @@ logging:
 
 
 server:
-  port: 9090
+  port: 8081
 

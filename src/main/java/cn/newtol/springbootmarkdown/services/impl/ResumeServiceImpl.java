@@ -97,7 +97,6 @@ public class ResumeServiceImpl implements ResumeService {
         map.put("m", String.valueOf(k.charAt(7)));
         // 请求接口，并上传文件
         HttpClientResult httpClientResult = HttpClientUtil.doPost("http://www.mdtr2pdf.com/upload",map,"upload_file",fileUrl);
-
         // 返回pdf文件地址
         return httpClientResult.getContent();
     }

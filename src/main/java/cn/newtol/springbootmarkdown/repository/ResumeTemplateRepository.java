@@ -1,7 +1,6 @@
 package cn.newtol.springbootmarkdown.repository;
 
 import cn.newtol.springbootmarkdown.dao.ResumeTemplate;
-import cn.newtol.springbootmarkdown.entity.ResumeTemplateVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -29,11 +28,10 @@ public interface ResumeTemplateRepository extends JpaRepository<ResumeTemplate,I
     String getResumeContentByResumeId(String resumeId);
 
     /**
-     * 查询模板简历的种类和各自的ID
+     * 查询模板简历的名字和各自的ID
      * @return
      */
-    @Query(value = "SELECT resume_type,resume_id from resume_template ",nativeQuery = true)
+    @Query(value = "SELECT resume_name,resume_id from resume_template ",nativeQuery = true)
     List<Map<String,String>> getResumeTemplateTypeList();
-
 
 }

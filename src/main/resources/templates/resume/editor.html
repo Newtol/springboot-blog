@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Newtol_编写自己的简历</title>
+    <!--头部样式-->
+    <link href="../../static/blogs/css/base.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="../../static/blogs/js/modernizr.js"></script>
+    <![endif]-->
+
+    <!--editor格式-->
+    <link rel="stylesheet" href="../../static/editor/css/style.css" />
+    <link rel="stylesheet" href="../../static/editor/css/editormd.css" />
+    <link rel="shortcut icon" href="../../static/favicon.ico" type="image/x-icon" />
+</head>
+<style>
+    #loading{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index:300;
+        background-image:url("../../static/editor/images/loading.gif");
+        background-repeat:no-repeat;
+        background-position:center center;
+        background-color:#000;
+        background-color:rgba(0,0,0,0.5);
+        filter:alpha(opacity=50);
+    }
+
+</style>
+
+<header class="header-navigation" id="header">
+    <nav><div class="logo"><a href="/">Newtol个人博客</a></div>
+        <h2 id="mnavh"><span class="navicon"></span></h2>
+        <ul id="starlist">
+            <li><a href="/index">网站首页</a></li>
+            <li><a href="share.html">我的相册</a></li>
+            <li><a href="list.html">我的日记</a></li>
+            <li><a href="about.html">关于我</a></li>
+            <li><a href="gbook.html">留言</a></li>
+            <li><a href="/test">内容页</a></li>
+            <li><a href="infopic.html">内容页</a></li>
+        </ul>
+    </nav>
+</header>
+<body>
+<div id="layout" style="margin-top: 70px;width: 90%;margin-left: 5%">
+    <form name="myForm" id = "myForm"method="post" action="http://localhost:8081/editor/myResume">
+        <div style="width:100%">
+            <input type="text"  name="title" placeholder="请输入简历名称" style="width: 85%;padding: 6px;border-radius: 4px">
+            <select name="resumeType" id = "resumeType" style="width: 14.5%;border-radius: 4px;padding: 6px">
+                <option selected="selected" value="">选择简历模板</option>
+            </select>
+        </div>
+        <div id="editor-md"  style="width: 90%; height: 640px;"  >
+            <textarea style="display:none;" name="content" id="content"></textarea>
+        </div>
+    </form>
+</div>
+
+
+<script src="../../static/editor/js/editor/jquery.min.js"></script>
+<script src="../../static/editor/js/editor/editormd.min.js"></script>
+
+
+<script type="text/javascript">
+    var testEditor;
+    var result = "## 请先选择简历模板";
+    // 加载模板简历类型
+    $(function () {
+        $.ajax({
+            url:'/resumeTemplate/lists',
+            dataType:'json',
+            async: false,
+            success:function(json){
+                var sl = document.getElementById("resumeType");
+                var b = json.data;
+                for (var i in b) {
+                    sl.options.add(new Option(b[i].resume_name,b[i].resume_id));
+                }
+            }
+        });
+    })
+
+    //  加载编辑器
+    $(function() {
+        getTemplate();
+        // 当选择模板简历后，重新加载编辑器
+        $("#resumeType").change(function(){
+            getTemplate();
+        });
+        function getTemplate() {
+            var resumeId=$("#resumeType").val();
+            $.ajax({
+                url:'http://localhost:8081/editor/getTemplateResume/'+resumeId,
+                dataType:'json',
+                async: false,
+                success:function(json){
+                    result=json.data;
+                }
+            });
+            testEditor = editormd("editor-md", {
+                width   : "100%",
+                height  : 640,
+                syncScrolling : "single",
+                path    : "../static/editor/lib/",
+                toolbarIcons : function() {
+                    return ["undo","redo","clear","goto-line","|","bold","del","italic","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","|","hr","link", "reference-link","image",
+                        "table","datetime","|","watch","unwatch","preview","|","search","html-entities","download"
+                    ]
+                },
+                toolbarIconsClass : {
+                    download: "fa-cloud-download"
+                },
+                lang : {
+                    toolbar : {
+                        download: "将文件下载为PDF"
+                    }
+                },
+                toolbarHandlers : {
+                    download: function () {
+                        downloadPdf();
+                    }},
+                // 图片上传
+                imageUpload : true,
+                imageFormats: ["jpg","jpeg","gif","png","bmp","webp"],
+                imageUploadURL: "/upload/img",
+                onload : function() {
+                    $("#loading").remove();
+                    this.setMarkdown(result);
+                }
+            });
+        }
+
+    });
+    //    下载pdf
+    function downloadPdf() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8081/editor/myResume" ,//url
+            data: $('#myForm').serialize(),
+            beforeSend:function(){
+                $("<div id=\"loading\"></div>").appendTo("body");
+            },
+            success: function (result) {
+                $("#loading").remove();
+                if(result.errorCode === 0){
+                    window.location.href=result.data;
+                }else {
+                    alert(result.errorMsg);
+                }
+            },
+            error : function() {
+                alert("服务器繁忙，请稍后再试！");
+            }
+        });
+    }
+</script>
+</body>
+</html>
+
+
+
+
