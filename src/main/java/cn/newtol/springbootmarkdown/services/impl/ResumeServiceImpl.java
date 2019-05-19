@@ -57,7 +57,7 @@ public class ResumeServiceImpl implements ResumeService {
         resumeInfo.setTitle(resumeDTO.getTitle());
         resumeInfo.setSummary(resumeUtil.getSummary(resumeDTO.getContent()));
         resumeInfo.setType(1);
-        String resumeUrl = resumeUtil.getUploadUrl(resumeDTO);
+        String resumeUrl = resumeUtil.getUploadUrl(resumeDTO.getTitle(),resumeDTO.getContent());
         resumeInfo.setResumeUrl(resumeUrl);
         // 保存到数据库
         ResumeInfo result = resumeRepository.save(resumeInfo);

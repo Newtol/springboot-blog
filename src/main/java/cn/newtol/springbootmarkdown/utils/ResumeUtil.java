@@ -27,7 +27,7 @@ public class ResumeUtil {
     /**
      * 获得文章摘要
      * @param content 文章内容
-     * @return
+     * @return 返回文章标题的前100个字节作为摘要
      * @throws FileNotFoundException
      */
     public String getSummary(String content)  {
@@ -51,9 +51,9 @@ public class ResumeUtil {
      * @return 返回文章的url
      * @throws FileNotFoundException
      */
-    public String getUploadUrl(ResumeDTO resumeDTO) throws FileNotFoundException{
-        String title = EncryptUtil.MD5(resumeDTO.getTitle());
-        String content = resumeDTO.getContent();
+    public String getUploadUrl(String title,String content) throws FileNotFoundException{
+        String atitle = EncryptUtil.MD5(title);
+//        String content = resumeDTO.getContent();
         // 判断文件夹是否已经创建
         File uploadDir = new File(UPLOAD_DIRECTORY);
         if (!uploadDir.exists()) {

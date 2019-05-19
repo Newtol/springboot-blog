@@ -1,0 +1,170 @@
+<!doctype html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Newtol_编写博客</title>
+    <!--头部样式-->
+    <link href="../../static/blogs/css/base.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="../../static/blogs/js/modernizr.js"></script>
+    <![endif]-->
+
+    <!--editor格式-->
+    <link rel="stylesheet" href="../../static/editor/css/style.css" />
+    <link rel="stylesheet" href="../../static/editor/css/editormd.css" />
+    <link rel="shortcut icon" href="../../static/favicon.ico" type="image/x-icon" />
+</head>
+<style>
+    #loading{
+        position:fixed;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        z-index:300;
+        background-image:url("../../static/editor/images/loading.gif");
+        background-repeat:no-repeat;
+        background-position:center center;
+        background-color:#000;
+        background-color:rgba(0,0,0,0.5);
+        filter:alpha(opacity=50);
+    }
+</style>
+<header class="header-navigation" id="header">
+    <nav><div class="logo"><a href="/">Newtol个人博客</a></div>
+        <h2 id="mnavh"><span class="navicon"></span></h2>
+        <ul id="starlist">
+            <li><a href="/index">网站首页</a></li>
+            <li><a href="share.html">我的相册</a></li>
+            <li><a href="list.html">我的日记</a></li>
+            <li><a href="about.html">关于我</a></li>
+            <li><a href="gbook.html">留言</a></li>
+            <li><a href="/test">内容页</a></li>
+            <li><a href="infopic.html">内容页</a></li>
+            <li><a href="infopic.html">内容页</a></li>
+
+        </ul>
+    </nav>
+</header>
+<body>
+<div id="layout" style="width: 100%;margin-top: 70px">
+    <form name="myForm" id = "myForm"method="post" action="http://localhost:8081/blog/saveContent">
+        <div  style="width: 90%;height: 10%;margin-left: 5%;">
+            输入文章名：<input type="text"  name="title" style="width:40% ;display:inline;padding: 3px;border-radius: 4px" placeholder="请输入文章名">
+            <div style="display:inline;height: 10%;margin-left: 10%;">
+                选择文章类型：
+                <label><input type="radio" name="isView" value="1">可见</label>
+                <label><input type="radio" name="isView" value="0">不可见</label>
+            </div><br>
+            输入关键词：<input type="text"  name="stringKey" style="width:40%;padding: 3px;border-radius: 4px;display:inline" placeholder="请输入关键词，并以英文逗号分隔">
+            <div style="display:inline;margin-left: 10%">
+                是否为原创文：
+                <label><input type="radio" name="isOrigin" value="1">原创</label>
+                <label><input type="radio" name="isOrigin" value="0">转载</label>
+            </div><br>
+            输入作者名：<input type="text" name="writer" style="width:40% ;display:inline;padding: 3px;border-radius: 4px;" placeholder="请输入作者" >
+            <div style="display:inline;margin-left: 10%">
+                选择专栏名称：
+                <select name="contentType" id = "contentType" style="width: 14.5%;border-radius: 4px;padding: 3px">
+                    <option selected="selected" value="">选择专栏</option>
+                </select>
+            </div><br>
+        </div>
+        <div id="editor-md"  style="width: 90%; height: 640px;"  >
+            <textarea style="display:none;" name="content" id="content"></textarea>
+        </div>
+    </form>
+</div>
+
+<footer>
+    <p>版权所有：<a href="/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
+</footer>
+
+
+<script src="../../static/editor/js/editor/jquery.min.js"></script>
+<script src="../../static/editor/js/editor/editormd.min.js"></script>
+
+
+<script type="text/javascript">
+    var testEditor;
+    var result = "## 请先选择简历模板";
+
+    //加载模板简历类型
+    $(function () {
+        $.ajax({
+            url:'/blog/ContentType',
+            dataType:'json',
+            async: false,
+            success:function(json){
+                var sl = document.getElementById("contentType");
+                var b = json.data;
+                for (var i in b) {
+                    sl.options.add(new Option(b[i],b[i]));
+                }
+            }
+        });
+    })
+
+    //  加载编辑器
+    $(function() {
+        testEditor = editormd("editor-md", {
+            width   : "90%",
+            height  : 530,
+            syncScrolling : "single",
+            path    : "../static/editor/lib/",
+            toolbarIcons : function() {
+                return ["undo","redo","clear","goto-line","|","bold","del","italic","|","h1","h2","h3","h4","h5","h6","|","list-ul","list-ol","|","hr","link", "reference-link","image",
+                    "table","datetime","|","watch","unwatch","preview","|","search","html-entities","download"
+                ]
+            },
+            toolbarIconsClass : {
+                download: "fa-cloud-download"
+            },
+            lang : {
+                toolbar : {
+                    download: "将文件下载为PDF"
+                }
+            },
+            toolbarHandlers : {
+                download: function () {
+                    downloadPdf();
+                }},
+            // 图片上传
+            imageUpload : true,
+            imageFormats: ["jpg","jpeg","gif","png","bmp","webp"],
+            imageUploadURL: "/upload/img",
+            onload : function() {
+                $("#loading").remove();
+                this.setMarkdown(result);
+            }
+        });
+    });
+    //    下载pdf
+    function downloadPdf() {
+        $.ajax({
+            //几个参数需要注意一下
+            type: "POST",//方法类型
+            dataType: "json",//预期服务器返回的数据类型
+            url: "http://localhost:8081/blog/saveContent" ,//url
+            data: $('#myForm').serialize(),
+            beforeSend:function(){
+                $("<div id=\"loading\"></div>").appendTo("body");
+            },
+            success: function (result) {
+                $("#loading").remove();
+                if(result.errorCode === 0){
+                   if(window.confirm("发布成功，是否需要跳转？")){
+                       window.location.href="/blogs/info?contentId="+result.data;
+                   }
+                }else {
+                    alert(result.errorMsg);
+                }
+            },
+            error : function() {
+                alert("服务器繁忙，请稍后再试！");
+            }
+        });
+    }
+</script>
+</body>
+</html>

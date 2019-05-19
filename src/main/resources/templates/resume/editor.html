@@ -29,9 +29,7 @@
         background-color:rgba(0,0,0,0.5);
         filter:alpha(opacity=50);
     }
-
 </style>
-
 <header class="header-navigation" id="header">
     <nav><div class="logo"><a href="/">Newtol个人博客</a></div>
         <h2 id="mnavh"><span class="navicon"></span></h2>
@@ -43,6 +41,8 @@
             <li><a href="gbook.html">留言</a></li>
             <li><a href="/test">内容页</a></li>
             <li><a href="infopic.html">内容页</a></li>
+            <li><a href="infopic.html">内容页</a></li>
+
         </ul>
     </nav>
 </header>
@@ -59,9 +59,12 @@
             <textarea style="display:none;" name="content" id="content"></textarea>
         </div>
     </form>
+
 </div>
 
-
+<footer>
+    <p>版权所有：<a href="/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
+</footer>
 <script src="../../static/editor/js/editor/jquery.min.js"></script>
 <script src="../../static/editor/js/editor/editormd.min.js"></script>
 
@@ -69,30 +72,28 @@
 <script type="text/javascript">
     var testEditor;
     var result = "## 请先选择简历模板";
-    // 加载模板简历类型
-    $(function () {
-        $.ajax({
-            url:'/resumeTemplate/lists',
-            dataType:'json',
-            async: false,
-            success:function(json){
-                var sl = document.getElementById("resumeType");
-                var b = json.data;
-                for (var i in b) {
-                    sl.options.add(new Option(b[i].resume_name,b[i].resume_id));
-                }
-            }
-        });
-    })
+
+
+   $(function () {
+       $.ajax({
+           url:'resumeTemplate/lists',
+           dataType:'json',
+           async: false,
+           success:function(json){
+               var sl = document.getElementById("resumeType");
+               var b = json.data;
+               for (var i in b) {
+                   sl.options.add(new Option(b[i].resume_name,b[i].resume_id));
+               }
+           }
+       });
+   });
 
     //  加载编辑器
     $(function() {
         getTemplate();
         // 当选择模板简历后，重新加载编辑器
         $("#resumeType").change(function(){
-            getTemplate();
-        });
-        function getTemplate() {
             var resumeId=$("#resumeType").val();
             $.ajax({
                 url:'http://localhost:8081/editor/getTemplateResume/'+resumeId,
@@ -102,9 +103,12 @@
                     result=json.data;
                 }
             });
+            getTemplate();
+        });
+        function getTemplate() {
             testEditor = editormd("editor-md", {
                 width   : "100%",
-                height  : 640,
+                height  : 580,
                 syncScrolling : "single",
                 path    : "../static/editor/lib/",
                 toolbarIcons : function() {
@@ -163,7 +167,3 @@
 </script>
 </body>
 </html>
-
-
-
-

@@ -7,7 +7,7 @@
   <meta name="description" content="杨青个人博客，是一个站在web前端设计之路的女程序员个人网站，提供个人博客模板免费资源下载的个人原创网站。" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--引入样式文件-->
-  <link rel="stylesheet" href="../../static/editor/css/style.css" />
+  <!--<link rel="stylesheet" href="../../static/editor/css/style.css" />-->
   <link rel="stylesheet" href="../../static/editor/css/editormd.preview.css" />
 
   <!--引入js文件-->
@@ -107,8 +107,8 @@
       </ul>
     </div>
   </aside>
-  <main>
-    <div class="infosbox">
+  <main >
+    <div class="infosbox" >
       <div class="newsview">
         <h3 class="news_title">个人博客，属于我的小世界！</h3>
         <div class="bloginfo">
@@ -166,25 +166,25 @@
 		  return true;
 		  }
 		  </script>
-          <form action="/e/pl/doaction.php" method="post" name="saypl" id="saypl" onsubmit="return CheckPl(document.saypl)">
-            <div id="plpost">
-              <p class="saying"><span><a href="/e/pl/?classid=77&amp;id=106">共有<script type="text/javascript" src="/e/public/ViewClick/?classid=77&amp;id=106&amp;down=2"></script>2条评论</a></span>来说两句吧...</p>
-              <p class="yname"><span>用户名:</span>
-                <input name="username" type="text" class="inputText" id="username" value="" size="16">
-              </p>
-              <p class="yzm"><span>验证码:</span>
-                <input name="key" type="text" class="inputText" size="16">
-              </p>
-              <input name="nomember" type="hidden" id="nomember" value="1" checked="checked">
-              <textarea name="saytext" rows="6" id="saytext"></textarea>
-              <input name="imageField" type="submit" value="提交">
-              <input name="id" type="hidden" id="id" value="106">
-              <input name="classid" type="hidden" id="classid" value="77">
-              <input name="enews" type="hidden" id="enews" value="AddPl">
-              <input name="repid" type="hidden" id="repid" value="0">
-              <input type="hidden" name="ecmsfrom" value="/joke/talk/2018-07-23/106.html">
-            </div>
-          </form>
+          <!--<form action="/e/pl/doaction.php" method="post" name="saypl" id="saypl" onsubmit="return CheckPl(document.saypl)">-->
+            <!--<div id="plpost">-->
+              <!--<p class="saying"><span><a href="/e/pl/?classid=77&amp;id=106">共有<script type="text/javascript" src="/e/public/ViewClick/?classid=77&amp;id=106&amp;down=2"></script>2条评论</a></span>来说两句吧...</p>-->
+              <!--<p class="yname"><span>用户名:</span>-->
+                <!--<input name="username" type="text" class="inputText" id="username" value="" size="16">-->
+              <!--</p>-->
+              <!--<p class="yzm"><span>验证码:</span>-->
+                <!--<input name="key" type="text" class="inputText" size="16">-->
+              <!--</p>-->
+              <!--<input name="nomember" type="hidden" id="nomember" value="1" checked="checked">-->
+              <!--<textarea name="saytext" rows="6" id="saytext"></textarea>-->
+              <!--<input name="imageField" type="submit" value="提交">-->
+              <!--<input name="id" type="hidden" id="id" value="106">-->
+              <!--<input name="classid" type="hidden" id="classid" value="77">-->
+              <!--<input name="enews" type="hidden" id="enews" value="AddPl">-->
+              <!--<input name="repid" type="hidden" id="repid" value="0">-->
+              <!--<input type="hidden" name="ecmsfrom" value="/joke/talk/2018-07-23/106.html">-->
+            <!--</div>-->
+          <!--</form>-->
         </div>
       </div>
     </div>
@@ -198,13 +198,24 @@
 
 
 <script type="text/javascript">
+  var content;
+  var contentId;
     $(function () {
+        var url = location.search; //获取url中"?"符后的字串
+        if (url.indexOf("?") != -1) {  //判断是否有参数
+            var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
+            strs = str.split("=");  //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
+            contentId = (strs[1]);     //直接弹出第一个参数 （如果有多个参数 还要进行循环的）
+        }
         $.ajax({
-            url:'http://localhost:8081/editor/getTemplateResume/'+"9F9E8CF0BAF619BA356CF5192B944797",
-            dataType:'json',
+//            url:'http://localhost:8081/editor/getTemplateResume/'+"9F9E8CF0BAF619BA356CF5192B944797",
+            url:"http://localhost:8081/static/"+contentId,
+            dataType:'text',
             async: false,
             success:function(json){
-                content = json.data;
+//                content = json.data;
+                content = json;
+//                alert(content);
             }
         });
         $("#testEditorMdview").html('<textarea id="appendTest"></textarea>');

@@ -68,6 +68,7 @@
 			<artifactId>httpmime</artifactId>
 		</dependency>
 
+
 		<!--&lt;!&ndash;热部署&ndash;&gt;-->
 		<!--<dependency>-->
 			<!--<groupId>org.springframework.boot</groupId>-->
@@ -85,5 +86,26 @@
 				</configuration>
 			</plugin>
 		</plugins>
+		<resources>
+			<resource>
+				<directory>${project.sources}</directory>
+				<filtering>true</filtering>
+				<excludes>
+					<exclude>**/*.woff</exclude>
+					<exclude>**/*.ttf</exclude>
+					<exclude>**/*.ico</exclude>
+				</excludes>
+			</resource>
+			<resource>
+				<directory>${project.sources}</directory>
+				<filtering>false</filtering>
+				<includes>
+					<include>**/*.woff</include>
+					<include>**/*.ttf</include>
+					<include>**/*.ico</include>
+				</includes>
+			</resource>
+		</resources>
 	</build>
+
 </project>

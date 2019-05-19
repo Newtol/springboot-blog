@@ -1,5 +1,5 @@
-@charset "gb2312";
-.infosbox { overflow: hidden; background: rgba(255,255,255,0.8); margin-bottom: 20px }
+@charset "utf-8";
+.infosbox { overflow: hidden; background: rgba(255,255,255,0.8); margin-bottom: 20px; }
 .newsview { padding: 0 30px }
 .news_con a { color: #0e6dad }
 .news_con a:hover { color: #000 }
