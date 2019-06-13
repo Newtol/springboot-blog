@@ -55,7 +55,7 @@ public class ContentInfo extends BaseDO{
      * 阅读量
      */
     @Column
-    private String readNum;
+    private Integer readNum=0;
     /**
      * 关键词
      */
@@ -89,4 +89,5 @@ public class ContentInfo extends BaseDO{
      */
     @Column
     private String contentUrl;
+
 }

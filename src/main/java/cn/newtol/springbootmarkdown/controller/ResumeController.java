@@ -97,7 +97,7 @@ public class ResumeController {
      */
     @GetMapping("/test")
     public String aboutMe(){
-        return "blogs/info";
+        return "blog/info";
     }
 
 }

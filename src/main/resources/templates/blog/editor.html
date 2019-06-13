@@ -4,9 +4,9 @@
     <meta charset="utf-8" />
     <title>Newtol_编写博客</title>
     <!--头部样式-->
-    <link href="../../static/blogs/css/base.css" rel="stylesheet">
+    <link href="../../static/blog/css/base.css" rel="stylesheet">
     <!--[if lt IE 9]>
-    <script src="../../static/blogs/js/modernizr.js"></script>
+    <script src="../../static/blog/js/modernizr.js"></script>
     <![endif]-->
 
     <!--editor格式-->
@@ -48,7 +48,7 @@
 </header>
 <body>
 <div id="layout" style="width: 100%;margin-top: 70px">
-    <form name="myForm" id = "myForm"method="post" action="http://localhost:8081/blog/saveContent">
+    <form name="myForm" id = "myForm"method="post">
         <div  style="width: 90%;height: 10%;margin-left: 5%;">
             输入文章名：<input type="text"  name="title" style="width:40% ;display:inline;padding: 3px;border-radius: 4px" placeholder="请输入文章名">
             <div style="display:inline;height: 10%;margin-left: 10%;">
@@ -92,7 +92,7 @@
     //加载模板简历类型
     $(function () {
         $.ajax({
-            url:'/blog/ContentType',
+            url:'/blog/contentType',
             dataType:'json',
             async: false,
             success:function(json){
@@ -145,7 +145,7 @@
             //几个参数需要注意一下
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
-            url: "http://localhost:8081/blog/saveContent" ,//url
+            url: "http://localhost:8081/blog/content" ,//url
             data: $('#myForm').serialize(),
             beforeSend:function(){
                 $("<div id=\"loading\"></div>").appendTo("body");
@@ -154,7 +154,7 @@
                 $("#loading").remove();
                 if(result.errorCode === 0){
                    if(window.confirm("发布成功，是否需要跳转？")){
-                       window.location.href="/blogs/info?contentId="+result.data;
+                       window.location.href="/blog/info?contentId="+result.data;
                    }
                 }else {
                     alert(result.errorMsg);

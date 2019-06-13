@@ -57,7 +57,22 @@ public enum ResultEnum {
     /**
      * 重置密码错误
      */
-    ResetPassWord_ERROR(8,"重置密码错误");
+    ResetPassWord_ERROR(8,"重置密码错误"),
+
+    /**
+     * 文件不存在
+     */
+    Content_NO_EXISTS(10,"文件不存在"),
+
+    /**
+     * 已经点过赞
+     */
+    Praise_EXISTS(11,"已经点过赞拉"),
+
+    /**
+     * 点赞失败
+     */
+    Praise_ERROR(12,"点赞走丢了，请稍后再试");
 
 
 

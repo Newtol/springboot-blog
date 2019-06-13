@@ -14,19 +14,7 @@ import javax.servlet.http.HttpServletRequest;
  * @Date: Created in 11:12 2019/5/15
  * @params:
  */
-//@Controller
-//public class MyErrorController implements ErrorController{
-//
-//    @GetMapping("/error")
-//    public String get(){
-//        return "error/404";
-//    }
-//
-//    @Override
-//    public String getErrorPath() {
-//        return null;
-//    }
-//}
+
 
 @Controller
 public class MyErrorController implements ErrorController {
@@ -39,7 +27,7 @@ public class MyErrorController implements ErrorController {
         }else if(status.value() == 500){
             return "error/500"; // 返回 500 页面
         }
-        return "error"; // 返回其它错误的页面
+        return "error/error"; // 返回其它错误的页面
     }
 
     @Override

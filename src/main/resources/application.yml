@@ -1,5 +1,8 @@
 defaultKey:
    UPLOAD_DIRECTORY: docs/resume
+   CONTENT_PRAISE: cn.newtol.springbootmarkdown.blog.content.praise
+   CONTENT_READNUM: cn.newtol.springbootmarkdown.blog.content.readNum
+
 
 
 spring:
@@ -38,10 +41,14 @@ spring:
       hibernate:
         ddl-auto: update
       show-sql: true
+      database-platform: org.hibernate.dialect.MySQL5InnoDBDialect
   servlet:
     multipart:
       max-file-size: 10MB
       max-request-size: 10MB
+  jackson:
+    date-format: yyyy-MM-dd HH:mm:ss
+    time-zone: GMT+8
 
 
 
@@ -49,7 +56,7 @@ spring:
 logging:
   level:
     cn:
-      newtol: debug
+      newtol: warn
   path: markdownLog
   pattern:
     file: "%d{yyyy-MM-dd} === [%thread] === %-5level === %logger{50} ==== %msg%n"
