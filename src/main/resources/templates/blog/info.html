@@ -3,13 +3,9 @@
 <head>
   <meta charset="utf-8">
   <title>Newtol_博客详情页</title>
-  <meta name="keywords" content="个人博客,杨青个人博客,个人博客模板,杨青" />
-  <meta name="description" content="杨青个人博客，是一个站在web前端设计之路的女程序员个人网站，提供个人博客模板免费资源下载的个人原创网站。" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!--引入样式文件-->
-  <!--<link rel="stylesheet" href="../../static/editor/css/style.css" />-->
   <link rel="stylesheet" href="../../static/editor/css/editormd.preview.css" />
-
   <!--引入js文件-->
   <script src="../../static/editor/js/editor/jquery.min.js"></script>
   <script src="../../static/editor/js/editor/marked.min.js"></script>
@@ -20,6 +16,9 @@
   <script src="../../static/editor/js/editor/flowchart.min.js"></script>
   <script src="../../static/editor/js/editor/jquery.flowchart.min.js"></script>
   <script src="../../static/editor/js/editor/editormd.js"></script>
+
+  <script src="../../static/blog/js/myJs.js"></script>
+  <script src="../../static/blog/js/info.js"></script>
 
 
   <link href="../../static/blog/css/base.css" rel="stylesheet">
@@ -38,56 +37,25 @@
     <div class="logo"><a href="/">Newtol个人博客</a></div>
     <h2 id="mnavh"><span class="navicon"></span></h2>
     <ul id="starlist">
-      <li><a href="index.html">网站首页</a></li>
-      <li><a href="share.html">我的相册</a></li>
-      <li><a href="list.html">我的日记</a></li>
-      <li><a href="about.html">关于我</a></li>
-      <li><a href="gbook.html">留言</a></li>
-      <li><a href="info.html">内容页</a></li>
-      <li><a href="infopic.html">内容页</a></li>
+      <li><a href="/blog/index">文章</a></li>
+      <li><a href="/blog/share">我的相册</a></li>
+      <li><a href="/blog/game">我的日记</a></li>
+      <li><a href="/blog/about">关于我</a></li>
+      <li><a href="/blog/gbook">留言&友链申请</a></li>
+      <li><a href="/editor">编辑md简历</a></li>
     </ul>
   </nav>
 </header>
 <article>
   <aside class="l_box">
     <div class="search">
-      <form action="/e/search/index.php" method="post" name="searchform" id="searchform">
+      <form action="/" method="post" name="searchform" id="searchform">
         <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字词" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
         <input name="show" value="title" type="hidden">
         <input name="tempid" value="1" type="hidden">
         <input name="tbname" value="news" type="hidden">
-        <input name="Submit" class="input_submit" value="搜索" type="submit">
+        <input name="Submit" class="input_submit" value="搜索" type="submit" >
       </form>
-    </div>
-    <div class="fenlei">
-      <h2>文章分类</h2>
-      <ul>
-        <li><a href="/">学无止境（33）</a></li>
-        <li><a href="/">日记（19）</a></li>
-        <li><a href="/">慢生活（520）</a></li>
-        <li><a href="/">美文欣赏（40）</a></li>
-      </ul>
-    </div>
-    <div class="tuijian">
-      <h2>站长推荐</h2>
-      <ul id="recommandationList"></ul>
-    </div>
-    <div class="tuijian">
-      <h2>点击排行</h2>
-      <ul>
-        <li><a href="/">你是什么人便会遇上什么人</a></li>
-        <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
-        <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
-        <li><a href="/">个人博客模板《绅士》后台管理</a></li>
-        <li><a href="/">你是什么人便会遇上什么人</a></li>
-        <li><a href="/">帝国cms 列表页调用子栏目，没有则不显示栏目名称</a></li>
-        <li><a href="/">第二届 优秀个人博客模板比赛参选活动</a></li>
-        <li><a href="/">个人博客模板《绅士》后台管理</a></li>
-      </ul>
-    </div>
-    <div class="cloud">
-      <h2>文章分类</h2>
-      <ul id="contentType"></ul>
     </div>
     <div class="guanzhu">
       <h2>关注我 有惊喜</h2>
@@ -95,6 +63,23 @@
         <img src="../../static/blog/images/wx.jpg">
       </ul>
     </div>
+    <div class="fenlei">
+      <h2>文章分类</h2>
+      <ul id="contentType">
+      </ul>
+    </div>
+    <div class="tuijian">
+      <h2>站长推荐</h2>
+      <ul id="recommandationList"></ul>
+    </div>
+    <div class="tuijian">
+      <h2>阅读排行</h2>
+      <ul id="readRankList"></ul>
+    </div>
+    <!--<div class="cloud">-->
+      <!--<h2>文章分类</h2>-->
+      <!--<ul id="keyWord"></ul>-->
+    <!--</div>-->
   </aside>
   <main>
     <div class="infosbox" >
@@ -108,207 +93,180 @@
           </ul>
         </div>
         <div class="tags"></div>
-        <div class="news_about"><strong>简介</strong>个人博客，用来做什么？我刚开始就把它当做一个我吐槽心情的地方，也就相当于一个网络记事本，写上一些关于自己生活工作中的小情小事，也会放上一些照片，音乐。每天工作回家后就能访问自己的网站，一边听着音乐，一边写写文章。</div>
+        <div class="news_about"><strong>简介</strong></div>
         <div class="news_con">
-          <div id="testEditorMdview">
-            <!--<textarea id="appendTest" style="display: none"></textarea>-->
-          </div>
+          <div id="testEditorMdview"></div>
         </div>
       </div>
       <div class="share">
         <p class="diggit" style="cursor: pointer" onclick="addPraise()"></p>
       </div>
       <div class="nextinfo">
-        <p>上一篇：<a href="/news/life/2018-03-13/804.html">作为一个设计师,如果遭到质疑你是否能恪守自己的原则?</a></p>
-        <p>下一篇：<a href="/news/life/">返回列表</a></p>
+        <p id="nextContent">上一篇：无</p>
+        <p id="previousContent">下一篇：无</p>
       </div>
       <div class="news_pl">
         <h2>文章评论</h2>
         <div class="gbko">
-          <script src="/e/pl/more/?classid=77&amp;id=106&amp;num=20"></script>
-          <div class="fb">
-            <ul>
-              <p class="fbtime"><span>2018-07-24 11:52:38</span>dancesmile</p>
-              <p class="fbinfo">这才是我要的朋友圈</p>
-            </ul>
-          </div>
-          <div class="fb">
-            <ul>
-              <p class="fbtime"><span>2018-07-24 08:52:48</span> 卜野</p>
-              <p class="fbinfo"></p>
-              <div class="ecomment"><span class="ecommentauthor">网友 家蚂蚁 的原文：</span>
-                <p class="ecommenttext">坚持哟!看你每天都有写，请继续加油，再接再厉哦</p>
-              </div>
-            </ul>
-          </div>
-          
-          <script>
-		  function CheckPl(obj)
-		  {
-		  if(obj.saytext.value=="")
-		  {
-		  alert("您没什么话要说吗？");
-		  obj.saytext.focus();
-		  return false;
-		  }
-		  return true;
-		  }
-		  </script>
-          <!--<form action="/e/pl/doaction.php" method="post" name="saypl" id="saypl" onsubmit="return CheckPl(document.saypl)">-->
-            <!--<div id="plpost">-->
-              <!--<p class="saying"><span><a href="/e/pl/?classid=77&amp;id=106">共有<script type="text/javascript" src="/e/public/ViewClick/?classid=77&amp;id=106&amp;down=2"></script>2条评论</a></span>来说两句吧...</p>-->
-              <!--<p class="yname"><span>用户名:</span>-->
-                <!--<input name="username" type="text" class="inputText" id="username" value="" size="16">-->
-              <!--</p>-->
-              <!--<p class="yzm"><span>验证码:</span>-->
-                <!--<input name="key" type="text" class="inputText" size="16">-->
-              <!--</p>-->
-              <!--<input name="nomember" type="hidden" id="nomember" value="1" checked="checked">-->
-              <!--<textarea name="saytext" rows="6" id="saytext"></textarea>-->
-              <!--<input name="imageField" type="submit" value="提交">-->
-              <!--<input name="id" type="hidden" id="id" value="106">-->
-              <!--<input name="classid" type="hidden" id="classid" value="77">-->
-              <!--<input name="enews" type="hidden" id="enews" value="AddPl">-->
-              <!--<input name="repid" type="hidden" id="repid" value="0">-->
-              <!--<input type="hidden" name="ecmsfrom" value="/joke/talk/2018-07-23/106.html">-->
-            <!--</div>-->
-          <!--</form>-->
+        </div>
+        <div>
+          <p id="0"><a class="saying" name= "0"  onclick="display(this);"><strong>你也来说两句吧（点击此处回复）...</strong></a></p>
         </div>
       </div>
     </div>
   </main>
+  <div >
+    <form id="replyForm" style="width:90%;display: none;margin: auto" name="replyForm" >
+        <p class="yname"><span>邮箱:</span>
+          <label >
+            <input name="fromId" type="text" placeholder="请输入邮箱" class="inputText" id="fromId"  size="16">*
+          </label>
+        </p>
+        <p class="yzm"><span>验证码:</span>
+          <label>
+            <input name="validCode" placeholder="请输入验证码" type="text" class="inputText" size="16">*
+            <img style="width: 95px;height: 25px;display: block;float: right" id = "validCode" src="../validCodeImg/1" onclick="changeCode();">
+          </label>
+        </p>
+        <input name="pId" type="hidden" id="pId" >
+        <label >
+          <textarea placeholder="欢迎留言，字数最多200字" name="message" rows="6" id="saytext" style="resize: none"></textarea>
+        </label>
+        <input type="button" value="评论" class="btn2" onclick = "saveMsg();" style="width: 100px;height: 40px;" />
+        <input name="toId" type="hidden" id="toId" >
+        <input name="contentId" type="hidden" id="contentId" >
+    </form>
+  </div>
 </article>
 <footer>
-  <p>版权所有：<a href="/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
+  <p>版权所有：<a href="/blog/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
 </footer>
 <a href="#" class="cd-top">Top</a>
 </body>
-
-
 <script type="text/javascript">
-  var contentId;
   $(function () {
-      // 获取contentId
-      var url = location.search; //获取url中"?"符后的字串
-      if (url.indexOf("?") != -1) {  //判断是否有参数
-          var str = url.substr(1); //从第一个字符开始 因为第0个是?号 获取所有除问号的所有符串
-          strs = str.split("=");  //用等号进行分隔 （因为知道只有一个参数 所以直接用等号进分隔 如果有多个参数 要用&号分隔 再用等号进行分隔）
-          contentId = (strs[1]);     //直接弹出第一个参数 （如果有多个参数 还要进行循环的）
+      getMsgByContentId();
+  });
+  // 获取评论
+  function getMsgByContentId() {
+      var msgList;
+      $.ajax({
+          url:"../msg?contentId="+contentId,
+          dataType:'json',
+          async: false,
+          success:function(json){
+             msgList = json.data;
+          }
+      });
+      if(msgList.length>0){
+          for(var i in msgList){
+              var a ="<a style='display:block;font-size:14px;text-align:right;font-weight:400;' name ='"+msgList[i].msgId+"' fromId='"+msgList[i].fromId+"' onclick='display(this)'>回复</a>";
+              var time ="<span style='display: block;float: right'>"+msgList[i].createTime+"</span>";
+              var  p1= "<p class='btime'>"+time+msgList[i].fromId+"</p>";
+              var p2 = "<p class='fbinfo'>"+msgList[i].message+"</p>";
+              $(".gbko").append("<div class=\"fb\" id='"+msgList[i].msgId+"'><ul>" +p1+p2+a+"</ul></div>");
+              getDiscuss(msgList[i].msgId);
+          }
       }
-      getContent(contentId);
-      getPraise();
-      getContentType();
-      getRecommandationList();
-  })
-
-  //  获取文章标签
-  function getContentType() {
-      $.ajax({
-          url:'/blog/contentType',
-          dataType:'json',
-          async: false,
-          success:function(json){
-              var sl = document.getElementById("contentType");
-              var b = json.data;
-              for (var i in b) {
-                  $("#contentType").append("<a href=''>"+b[i]+"</a>")
-              }
-          }
-      });
   }
-
-  // 获取文章并解析
-  function getContent(contentId) {
-      var data;
-      var errorMsg;
-      $.ajax({
-          url:"./content?contentId="+contentId,
-          dataType:'json',
-          async: false,
-          success:function(json){
-              data = json.data;
-              errorMsg = json.errorMsg;
-          }
-      });
-      if(data === null){
-          $("#testEditorMdview").html('<textarea id="appendTest"></textarea>');
-          $("#appendTest").val(errorMsg);
+  //显示
+//  function show() {
+//      if(document.getElementById('saypl').style.display ==="none"){
+//          document.getElementById('saypl').style.display ="";
+//      }else {
+//          document.getElementById('saypl').style.display ="none";
+//      }
+//  }
+  // 判断是否已经展示form表单
+  var Key;
+  function display(obj) {
+      var id = obj.name;
+      if(Key===obj.name && document.getElementById('replyForm').style.display ===""){
+          document.getElementById('replyForm').style.display ="none"
       }else {
-          // 解析文章内容
-          $("#testEditorMdview").html('<textarea id="appendTest"></textarea>');
-          $("#appendTest").val(data.content);
-          $(".news_title").html(data.title);
-          $(".author").html("作者:"+data.writer);
-          $(".timer").html("时间："+data.createTime);
-          $(".view").html(data.readNum+"人已阅读");
-          var stringkey = data.stringKey.split(",");
-          for (var i in stringkey) {
-              $(".tags").append("<a href=''>"+stringkey[i]+"</a>")
-          }
+          document.getElementById('replyForm').style.display ="";
+          $("#replyForm").appendTo(document.getElementById(id));
+          document.getElementById("pId").value =id;
+          document.getElementById("toId").value = obj.getAttribute("fromId");
+          Key = obj.name;
       }
-      //转换开始,第一个参数是上面的div的id
-      editormd.markdownToHTML("testEditorMdview", {
-          htmlDecode: "style,script,iframe", //可以过滤标签解码
-          emoji: true,
-          taskList:true,
-          tex: true,               // 默认不解析
-          flowChart:true,         // 默认不解析
-          sequenceDiagram:true,  // 默认不解析
-      });
   }
 
-  // 获取点赞数
-  function getPraise() {
-      var praiseNum=0;
-      $.ajax({
-          url:"/praise?contentId="+contentId,
-          dataType:'json',
-          async: false,
-          success:function(json){
-              praiseNum = json.data;
-          }
-      });
-      $(".diggit").html("赞："+praiseNum);
-  }
-
-  // 点赞
-  function addPraise() {
-      var diggit;
+  // 保存二级评论
+  function saveMsg() {
+      changeCode();
+      if(!CheckPl()){
+          return;
+      }
+      document.getElementById("contentId").value = getContentId();
       $.ajax({
           type: 'POST',
-          url:"/blog/praise",
+          url:"../msg",
           dataType:'json',
           async: false,
-          data:{"contentId":contentId},
+          data:$("#replyForm").serialize(),
           success:function(json){
+              var data = json.data; 2
               if(json.errorCode===0){
-                  diggit = json.data;
-                  alert("感谢您的支持");
-                  $(".diggit").html("赞："+diggit);
+                  alert("已经收到你的评论啦！");
+                  $("#replyForm").remove();
+                  window.location.reload();
               }else {
                   alert(json.errorMsg);
               }
           }
       });
   }
-  function getRecommandationList() {
-      var recommandationList;
+  function CheckPl(){
+      var obj = document.replyForm;
+      // 检验邮箱是否为邮箱
+      var reg = /^\w+((.\w+)|(-\w+))@[A-Za-z0-9]+((.|-)[A-Za-z0-9]+).[A-Za-z0-9]+$/;
+
+      if(obj.fromId.value==""){
+          alert("邮箱不可为空");
+          obj.fromId.focus();
+          return false;
+      }else if(!reg.test(obj.fromId.value)){
+          alert("邮箱格式不正确");
+          return false;
+      }
+      // 检验是否有输入留言
+      if(obj.saytext.value=="")
+      {
+          alert("您没什么话要说吗？");
+          obj.saytext.focus();
+          return false;
+      }
+      // 设置被评论的文章
+      return true;
+  }
+  // 生成二级评论节点
+  function createMsgNode(data) {
+      var time ="<span style='float: right' >"+data.createTime+"</span>";
+      $("<div class='ecomment' style='width: 90%;display: block;margin: auto;background-color: #efefef'><span class=\"ecommentauthor\">"+data.fromId+"回复 :"+data.toId+time+"</span>" + "<p class=\"ecommenttext\">"+data.message+"</p>" + "</div>").appendTo(document.getElementById(data.pid));
+
+  }
+  // 获取二级评论
+  function getDiscuss(pId) {
+      var discussList;
       $.ajax({
-          url:"/blog/recommendationList",
+          url:"../msg2?pId="+pId,
           dataType:'json',
           async: false,
           success:function(json){
-              recommandationList = json.data;
+              discussList = json.data;
           }
       });
-//      var sl = document.getElementById("recommandationList");
-
-      for(var i in recommandationList){
-          $("#recommandationList").append("<li><a href='/blog/info?contentId="+recommandationList[i].content_id+"'>"+recommandationList[i].title+"</a></li>")
+      if(discussList.length>0){
+          for(var i in discussList){
+              createMsgNode(discussList[i]);
+          }
       }
-
   }
-  
+
+  function changeCode() {
+      document.getElementById("validCode").src ="/validCodeImg/"+Math.random();
+  }
 
 
 </script>

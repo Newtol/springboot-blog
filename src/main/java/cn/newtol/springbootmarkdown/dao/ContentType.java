@@ -24,13 +24,13 @@ public class ContentType extends BaseDO{
     /**
      * 文章分类
      */
-    @Column()
+    @Column
     @NotEmpty(message = "文章类目名不能为空")
     private String name;
 
-//    /**
-//     * 该类型文章数量
-//     */
-//    @Column
-//    private Integer num=0;
+    /**
+     * 该类型文章数量
+     */
+    @Column
+    private Integer num=0;
 }

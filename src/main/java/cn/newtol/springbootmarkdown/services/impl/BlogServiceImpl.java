@@ -16,6 +16,9 @@ import cn.newtol.springbootmarkdown.utils.ResumeUtil;
 import com.sun.corba.se.impl.presentation.rmi.DynamicMethodMarshallerImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -69,7 +72,9 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public ResultVO getAllContentType() {
         List<String> list = contentTypeRepository.getContentName();
-        return ResultUtil.success(list);
+
+        List<ContentType> list1 = contentTypeRepository.findAll();
+        return ResultUtil.success(list1);
     }
 
     @Override
@@ -79,12 +84,18 @@ public class BlogServiceImpl implements BlogService {
     }
 
     @Override
+    @Transactional(rollbackFor = Exception.class)
     public ResultVO saveContentInfo(ContentInfo contentInfo) throws FileNotFoundException {
+        // 随机生成文章ID
         String contentId = resumeUtil.getResumeIdByRandom(contentInfo.getContent());
         contentInfo.setContentId(contentId);
+        // 获取文章摘要
         contentInfo.setSummary(resumeUtil.getSummary(contentInfo.getContent()));
+        // 将文章保存以md文件保存，并返回地址
         contentInfo.setContentUrl(resumeUtil.getUploadUrl(contentId,contentInfo.getContent()));
+        // 保存信息并返回文章ID,文章类型数量加1
         contentInfoRepository.save(contentInfo);
+        contentTypeRepository.updateContentNum(contentInfo.getContentType());
         return ResultUtil.success(contentId);
     }
 
@@ -118,13 +129,15 @@ public class BlogServiceImpl implements BlogService {
         return ResultUtil.success(contentInfo);
     }
 
-    @Transactional
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public ResultVO addPraise(ContentPraise contentPraise) {
-        System.out.println(contentPraise.getContentId());
+
+        // 判断是否已经点赞过
         if (contentPraiseRepository.existsByContentIdAndAndIp(contentPraise.getContentId(),contentPraise.getIp())){
             throw new MyException(ResultEnum.Praise_EXISTS);
         }
+        // 保存点赞历史
         if(contentPraiseRepository.save(contentPraise)==null ){
             throw new MyException(ResultEnum.Praise_ERROR);
         }
@@ -161,6 +174,32 @@ public class BlogServiceImpl implements BlogService {
     @Override
     public ResultVO getRecommendationList() {
         return ResultUtil.success(contentInfoRepository.getRecommandtionList());
+    }
+
+    @Override
+    public ResultVO getReadRankList() {
+        return ResultUtil.success(contentInfoRepository.getReadRankList());
+    }
+
+    @Override
+    public ResultVO getNearContent(String createTime) {
+        return ResultUtil.success(contentInfoRepository.getNearContent(createTime));
+    }
+
+    @Override
+    public ResultVO getContentList(Integer page) {
+        Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
+        PageRequest pageRequest = PageRequest.of(page-1,5,sort);
+        Page<ContentInfo> contentInfoPage = contentInfoRepository.findAll(pageRequest);
+        return  ResultUtil.success(contentInfoPage);
+    }
+
+    @Override
+    public ResultVO getContentListByContentType(String contentType,Integer page) {
+        Sort sort = new Sort(Sort.Direction.DESC,"updateTime");
+        PageRequest pageRequest = PageRequest.of(page-1,5,sort);
+        Page<ContentInfo> contentInfoPage = contentInfoRepository.findAllByContentType(contentType,pageRequest);
+        return  ResultUtil.success(contentInfoPage);
     }
 
 

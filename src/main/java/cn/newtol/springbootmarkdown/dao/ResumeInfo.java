@@ -11,7 +11,7 @@ import javax.validation.constraints.NotEmpty;
 
 /**
  * @Author: 公众号：Newtol
- * @Description:
+ * @Description: 简历实体
  * @Date: Created in 22:50 2019/4/29
  * @params:
  */

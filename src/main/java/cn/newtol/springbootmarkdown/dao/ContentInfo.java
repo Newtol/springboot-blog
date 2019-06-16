@@ -13,7 +13,7 @@ import javax.validation.constraints.NotNull;
 
 /**
  * @Author: 公众号：Newtol
- * @Description:
+ * @Description: 文章实体
  * @Date: Created in 22:44 2019/5/15
  * @params:
  */

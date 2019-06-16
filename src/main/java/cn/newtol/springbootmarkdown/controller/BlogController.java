@@ -130,4 +130,74 @@ public class BlogController {
     public ResultVO getRecommendationList(){
         return blogService.getRecommendationList();
     }
+
+    /**
+     * 获取阅读排行榜
+     * @return
+     */
+    @GetMapping("/readRankList")
+    @ResponseBody
+    public ResultVO getReadRankList(){
+        return blogService.getReadRankList();
+    }
+
+    /**
+     * 获取上一篇、下一篇文章
+     * @param createTime：当前文章的创作时间
+     * @return：返回文章ID、文章标题
+     */
+    @GetMapping("/nearContent")
+    @ResponseBody
+    public ResultVO getNearContent(@RequestParam String createTime){
+        return blogService.getNearContent(createTime);
+    }
+
+    /**
+     * 根据时间顺序获取文章列表
+     * @param page
+     * @return
+     */
+    @GetMapping("/contentList")
+    @ResponseBody
+    public ResultVO getContentList(@RequestParam Integer page){
+        return blogService.getContentList(page);
+    }
+
+
+    @GetMapping("/list")
+    public String getListIndex(){
+        return "blog/list";
+    }
+    /**
+     * 根据文章类型获取文章列表
+     * @param contentType：文章类型
+     * @param page：页数
+     * @return
+     */
+    @GetMapping("contentList/{contentType}")
+    @ResponseBody
+    public ResultVO getContentListByContentType(@PathVariable String contentType,@RequestParam Integer page){
+        return blogService.getContentListByContentType(contentType,page);
+    }
+
+    @GetMapping("/share")
+    public String getShare(){
+        return "blog/share";
+    }
+
+    @GetMapping("/gbook")
+    public String getGbook(){
+        return "blog/gbook";
+    }
+
+    @GetMapping("/about")
+    public String getAbout(){
+        return "blog/about";
+    }
+
+    @GetMapping("/game")
+    public String getGame(){
+        return "blog/infopic";
+    }
+
 }

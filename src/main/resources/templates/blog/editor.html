@@ -31,18 +31,16 @@
     }
 </style>
 <header class="header-navigation" id="header">
-    <nav><div class="logo"><a href="/">Newtol个人博客</a></div>
+    <nav>
+        <div class="logo"><a href="/">Newtol个人博客</a></div>
         <h2 id="mnavh"><span class="navicon"></span></h2>
         <ul id="starlist">
-            <li><a href="/index">网站首页</a></li>
-            <li><a href="share.html">我的相册</a></li>
-            <li><a href="list.html">我的日记</a></li>
-            <li><a href="about.html">关于我</a></li>
-            <li><a href="gbook.html">留言</a></li>
-            <li><a href="/test">内容页</a></li>
-            <li><a href="infopic.html">内容页</a></li>
-            <li><a href="infopic.html">内容页</a></li>
-
+            <li><a href="/blog/index">文章</a></li>
+            <li><a href="/blog/share">我的相册</a></li>
+            <li><a href="/blog/game">我的日记</a></li>
+            <li><a href="/blog/about">关于我</a></li>
+            <li><a href="/blog/gbook">留言&友链申请</a></li>
+            <li><a href="/editor">编辑md简历</a></li>
         </ul>
     </nav>
 </header>
@@ -75,9 +73,8 @@
         </div>
     </form>
 </div>
-
 <footer>
-    <p>版权所有：<a href="/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
+    <p>版权所有：<a href="/blog/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
 </footer>
 
 
@@ -99,7 +96,7 @@
                 var sl = document.getElementById("contentType");
                 var b = json.data;
                 for (var i in b) {
-                    sl.options.add(new Option(b[i],b[i]));
+                    sl.options.add(new Option(b[i].name,b[i].name));
                 }
             }
         });
@@ -122,7 +119,7 @@
             },
             lang : {
                 toolbar : {
-                    download: "将文件下载为PDF"
+                    download: "发表文章"
                 }
             },
             toolbarHandlers : {

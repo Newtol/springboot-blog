@@ -68,18 +68,26 @@
 			<artifactId>httpmime</artifactId>
 		</dependency>
 
-		<dependency>
-			<groupId>commons-io</groupId>
-			<artifactId>commons-io</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.google.guava</groupId>
-			<artifactId>guava</artifactId>
-		</dependency>
+		<!--<dependency>-->
+			<!--<groupId>commons-io</groupId>-->
+			<!--<artifactId>commons-io</artifactId>-->
+		<!--</dependency>-->
+		<!--<dependency>-->
+			<!--<groupId>com.google.guava</groupId>-->
+			<!--<artifactId>guava</artifactId>-->
+		<!--</dependency>-->
 		<!--Redis组件-->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<!--引入第三方jar-Mas jar-->
+		<dependency>
+			<groupId>cn.newtol</groupId>
+			<artifactId>springboot-markdown</artifactId>
+			<scope>system</scope>
+			<systemPath>${project.basedir}/src/main/resources/lib/alex-word-filter.jar</systemPath>
 		</dependency>
 
 

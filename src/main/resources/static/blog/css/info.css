@@ -12,3 +12,29 @@
 .news_about strong { color: #38485A; font-weight: 400 !important; font-size: 13px; padding-right: 8px; }
 .news_content { line-height: 24px; font-size: 14px; }
 .news_content p { overflow: hidden; padding-bottom: 4px; padding-top: 6px; word-wrap: break-word; }
+.hide{
+    display: none;
+}
+.c1{
+    position: fixed;
+    top:0;
+    bottom: 0;
+    left:0;
+    right: 0;
+    background: rgba(0,0,0,.5);
+    z-index: 2;
+}
+.c2{
+    background-color: white;
+    position: fixed;
+    width: 400px;
+    height: 300px;
+    top:50%;
+    left: 50%;
+    z-index: 3;
+    margin-top: -150px;
+    margin-left: -200px;
+}
+#modal p {
+    margin-left:80px;
+}

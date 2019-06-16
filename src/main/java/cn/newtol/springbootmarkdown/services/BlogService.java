@@ -4,7 +4,9 @@ import cn.newtol.springbootmarkdown.dao.ContentInfo;
 import cn.newtol.springbootmarkdown.dao.ContentPraise;
 import cn.newtol.springbootmarkdown.dao.ContentType;
 import cn.newtol.springbootmarkdown.entity.ResultVO;
+import com.sun.org.apache.regexp.internal.RE;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -70,6 +72,34 @@ public interface BlogService {
      * @return：返回最近的5条文章
      */
     ResultVO getRecommendationList();
+
+
+    /**
+     * 获取阅读排行榜
+     * @return
+     */
+    ResultVO getReadRankList();
+
+
+    /**
+     * 获取上一篇、下一篇文章
+     * @return
+     */
+    ResultVO getNearContent(String createTime);
+
+    /**
+     * 获取文章列表
+     * @return
+     */
+    ResultVO getContentList(Integer page);
+
+
+    /**
+     * 根据文章类型来获取文章列表
+     * @param contentType
+     * @return
+     */
+    ResultVO getContentListByContentType(String contentType,Integer page);
 
 
 

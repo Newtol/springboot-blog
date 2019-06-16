@@ -2,6 +2,8 @@ package cn.newtol.springbootmarkdown.repository;
 
 import cn.newtol.springbootmarkdown.dao.ContentPraise;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 /**
  * @Author: 公众号：Newtol
@@ -9,6 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @Date: Created in 17:19 2019/6/13
  * @params:
  */
+@Service
+@Repository
 public interface ContentPraiseRepository extends JpaRepository<ContentPraise,Integer> {
     /**
      * 判断已经点赞

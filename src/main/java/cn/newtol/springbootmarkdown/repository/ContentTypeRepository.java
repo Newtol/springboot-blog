@@ -28,15 +28,14 @@ public interface ContentTypeRepository extends JpaRepository<ContentType,Integer
 
 
 
-//    /**
-//     * 更新文章数目
-//     * @param content_type
-//     * @return
-//     */
-//    @Modifying
-//    @Query(value = "UPDATE content_type SET num = num+1 where content_type = ? ",nativeQuery = true)
-//    Boolean updateContentNum(String content_type);
 
 
-
+    /**
+     * 更新文章数目
+     * @param name:contentType
+     * @return
+     */
+    @Modifying
+    @Query(value = "UPDATE content_type SET num = num+1 where name = ? ",nativeQuery = true)
+    Integer updateContentNum(String name);
 }
