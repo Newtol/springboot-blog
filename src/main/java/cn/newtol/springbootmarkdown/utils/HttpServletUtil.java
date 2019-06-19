@@ -42,6 +42,11 @@ public class HttpServletUtil {
         response.setHeader("Location", url);
     }
 
+    /**
+     * 获取IP地址
+     * @param request
+     * @return
+     */
     public static String getIpAdrress(HttpServletRequest request){
         String ip = request.getHeader("x-forwarded-for");
         if (ip == null || ip.length() == 0 || "unknown".equalsIgnoreCase(ip)) {

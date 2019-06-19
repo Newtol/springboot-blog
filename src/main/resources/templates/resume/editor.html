@@ -10,7 +10,7 @@
     <script src="../../static/blog/js/modernizr.js"></script>
     <![endif]-->
     <!--editor格式-->
-    <link rel="stylesheet" href="../../static/editor/                 css/style.css" />
+    <link rel="stylesheet" href="../../static/editor/css/style.css" />
     <link rel="stylesheet" href="../../static/editor/css/editormd.css" />
     <link rel="shortcut icon" href="../../static/favicon.ico" type="image/x-icon" />
 </head>
@@ -93,7 +93,7 @@
         $("#resumeType").change(function(){
             var resumeId=$("#resumeType").val();
             $.ajax({
-                url:'http://localhost:8081/editor/getTemplateResume/'+resumeId,
+                url:'/editor/getTemplateResume/'+resumeId,
                 dataType:'json',
                 async: false,
                 success:function(json){
@@ -143,7 +143,7 @@
             //几个参数需要注意一下
             type: "POST",//方法类型
             dataType: "json",//预期服务器返回的数据类型
-            url: "http://localhost:8081/editor/myResume" ,//url
+            url: "/editor/myResume" ,//url
             data: $('#myForm').serialize(),
             beforeSend:function(){
                 $("<div id=\"loading\"></div>").appendTo("body");

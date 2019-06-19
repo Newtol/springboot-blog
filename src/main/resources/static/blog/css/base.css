@@ -40,3 +40,44 @@ footer a { color: #a5a4a4; }
 .cd-top { display: inline-block; height: 40px; width: 40px; position: fixed; bottom: 40px; right: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.05); overflow: hidden; text-indent: 100%; white-space: nowrap; background: rgba(0, 0, 0, 0.8) url(../images/top.png) no-repeat center; visibility: hidden; opacity: 0; -webkit-transition: all 0.3s; -moz-transition: all 0.3s; transition: all 0.3s; }
 .cd-top.cd-is-visible { visibility: visible; opacity: 1; }
 
+/*浮动小人*/
+.spig {
+    display: block;
+    width: 200px;
+    height: 200px;
+    bottom: 100px;
+    right: 0px;
+    z-index: 9999;
+    position: fixed;
+}
+#message {
+    line-height:170%;
+    color: #191919;
+    background: #ddd;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    min-height: 1em;
+    padding: 5px;
+    top: -45px;
+    /*position: absolute;*/
+    text-align: center;
+    width: auto;
+    z-index: 10000;
+    -moz-box-shadow: 0 0 15px #eeeeee;
+    -webkit-box-shadow: 0 0 15px #eeeeee;
+    border-color: #eeeeee;
+    box-shadow: 0 0 15px #eeeeee;
+    outline: none;
+    word-wrap: break-word;word-break: break-all;overflow: hidden;
+    position: absolute;
+
+}
+.mumu {
+    width: 200px;
+    height: 200px;
+    cursor: move;
+    background: url("../images/test.jpg") no-repeat;
+    position: fixed;
+
+}

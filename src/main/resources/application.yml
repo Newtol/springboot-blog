@@ -2,6 +2,8 @@ defaultKey:
    UPLOAD_DIRECTORY: docs/resume
    CONTENT_PRAISE: cn.newtol.springbootmarkdown.blog.content.praise
    CONTENT_READNUM: cn.newtol.springbootmarkdown.blog.content.readNum
+   WEATHER_URL: https://www.tianqiapi.com/api/
+   SOUP_KEY: cn.newtol.springbootmarkdown.api.soupKey
 
 
 

@@ -6,7 +6,6 @@ import org.springframework.data.redis.core.ValueOperations;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
@@ -97,6 +96,26 @@ public class RedisUtil {
      */
     public Map getAllHash(String key){
         return stringRedisTemplate.opsForHash().entries(key);
+    }
+
+
+    /**
+     * 往SET中添加数据
+     * @param key
+     * @param member
+     * @return
+     */
+    public Long sadd(String key, String member){
+        return stringRedisTemplate.opsForSet().add(key,member);
+    }
+
+    /**
+     * 随机获取一个成员
+     * @param key
+     * @return
+     */
+    public String srandMember(String key){
+        return stringRedisTemplate.opsForSet().randomMember(key);
     }
 
 

@@ -1,4 +1,5 @@
 @charset "utf-8";
+*{touch-action: pan-y;}
 .infosbox { overflow: hidden; background: rgba(255,255,255,0.8); margin-bottom: 20px; }
 .newsview { padding: 0 30px }
 .news_con a { color: #0e6dad }
@@ -38,3 +39,6 @@
 #modal p {
     margin-left:80px;
 }
+
+
+

@@ -74,26 +74,7 @@ function getPraise() {
     $(".diggit").html("赞："+praiseNum);
 }
 
-// 点赞
-function addPraise() {
-    var diggit;
-    $.ajax({
-        type: 'POST',
-        url:"/blog/praise",
-        dataType:'json',
-        async: false,
-        data:{"contentId":contentId},
-        success:function(json){
-            if(json.errorCode===0){
-                diggit = json.data;
-                alert("感谢您的支持");
-                $(".diggit").html("赞："+diggit);
-            }else {
-                alert(json.errorMsg);
-            }
-        }
-    });
-}
+
 // 获取上一篇、下一篇文章
 function getNearContent(createTime) {
 

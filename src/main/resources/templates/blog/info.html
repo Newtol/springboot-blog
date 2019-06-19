@@ -4,6 +4,8 @@
   <meta charset="utf-8">
   <title>Newtol_博客详情页</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+
   <!--引入样式文件-->
   <link rel="stylesheet" href="../../static/editor/css/editormd.preview.css" />
   <!--引入js文件-->
@@ -19,7 +21,9 @@
 
   <script src="../../static/blog/js/myJs.js"></script>
   <script src="../../static/blog/js/info.js"></script>
-
+  <script src="../../static/blog/js/mumu.js"></script>
+  <script src="../../static/blog/js/safe.js"></script>
+  <link rel="shortcut icon" href="../../static/favicon.ico" type="image/x-icon" />
 
   <link href="../../static/blog/css/base.css" rel="stylesheet">
   <link href="../../static/blog/css/index.css" rel="stylesheet">
@@ -31,6 +35,27 @@
 <script src="../../static/blog/js/modernizr.js"></script>
 <![endif]-->
 </head>
+<style>
+  .content{width:80%;margin:10px auto;}
+  .hide_box{z-index:999;filter:alpha(opacity=50);background:#666;opacity: 0.5;-moz-opacity: 0.5;left:0;top:0;height:99%;width:100%;position:fixed;display:none;}
+  .shang_box{width:540px;height:540px;padding:10px;background-color:#fff;border-radius:10px;position:fixed;z-index:1000;left:50%;top:50%;margin-left:-280px;margin-top:-280px;border:1px dotted #dedede;display:none;}
+  .shang_box img{border:none;border-width:0;}
+  .dashang{display:block;width:100px;margin:5px auto;height:25px;line-height:25px;padding:10px;background-color:#E74851;color:#fff;text-align:center;text-decoration:none;border-radius:10px;font-weight:bold;font-size:16px;transition: all 0.3s;}
+  .dashang:hover{opacity:0.8;padding:15px;font-size:18px;}
+  .shang_close{float:right;display:inline-block;}
+  .shang_logo{display:block;text-align:center;margin:20px auto;}
+  .shang_tit{width: 100%;height: 75px;text-align: center;line-height: 66px;color: #a3a3a3;font-size: 16px;background: url('/dsimg/cy-reward-title-bg.jpg');font-family: 'Microsoft YaHei';margin-top: 7px;margin-right:2px;}
+  .shang_tit p{color:#a3a3a3;text-align:center;font-size:16px;}
+  .shang_payimg{width:140px;padding:10px;border:6px solid #EA5F00;margin:0 auto;border-radius:3px;height:140px;}
+  .shang_payimg img{display:block;text-align:center;width:140px;height:140px; }
+  .pay_explain{text-align:center;margin:10px auto;font-size:12px;color:#545454;}
+  .radiobox{width: 16px;height: 16px;background: url('https://static.runoob.com/images/dashang/radio2.jpg');display: block;float: left;margin-top: 5px;margin-right: 14px;}
+  .checked .radiobox{background:url('https://static.runoob.com/images/dashang/radio1.jpg');}
+  .shang_payselect{text-align:center;margin:0 auto;margin-top:40px;cursor:pointer;height:60px;width:280px;}
+  .shang_payselect .pay_item{display:inline-block;margin-right:10px;float:left;}
+  .shang_info{clear:both;}
+  .shang_info p,.shang_info a{color:#C3C3C3;text-align:center;font-size:12px;text-decoration:none;line-height:2em;}
+</style>
 <body>
 <header class="header-navigation" id="header">
   <nav>
@@ -38,9 +63,9 @@
     <h2 id="mnavh"><span class="navicon"></span></h2>
     <ul id="starlist">
       <li><a href="/blog/index">文章</a></li>
-      <li><a href="/blog/share">我的相册</a></li>
-      <li><a href="/blog/game">我的日记</a></li>
       <li><a href="/blog/about">关于我</a></li>
+      <li><a href="/blog/share">我的相册</a></li>
+      <li><a href="/blog/game">开放API</a></li>
       <li><a href="/blog/gbook">留言&友链申请</a></li>
       <li><a href="/editor">编辑md简历</a></li>
     </ul>
@@ -99,8 +124,33 @@
         </div>
       </div>
       <div class="share">
-        <p class="diggit" style="cursor: pointer" onclick="addPraise()"></p>
+        <p class="diggit" style="cursor: pointer" onclick="addPraise();"></p>
+        <div class="hide_box"></div>
+        <div class="shang_box">
+          <a class="shang_close" href="javascript:void(0)" onclick="dashangToggle()" title="关闭"><img src="https://static.runoob.com/images/dashang/close.jpg" alt="取消" /></a>
+          <div class="shang_tit">
+            <p>感谢您的支持，我会继续努力的!</p>
+          </div>
+          <div class="shang_payimg">
+            <img src="../../static/blog/images/alipay.jpg" alt="扫码支持" title="扫一扫" />
+          </div>
+          <div class="pay_explain">扫码打赏，你说多少就多少</div>
+          <div class="shang_payselect">
+            <div class="pay_item checked" data-id="alipay">
+              <span class="radiobox"></span>
+              <span class="pay_logo"><img src="../../static/blog/images/ali.jpg" alt="支付宝" /></span>
+            </div>
+            <div class="pay_item" data-id="weipay">
+              <span class="radiobox"></span>
+              <span class="pay_logo"><img src="../../static/blog/images/wechat.jpg" alt="微信" /></span>
+            </div>
+          </div>
+          <div class="shang_info">
+            <p>打开<span id="shang_pay_txt">支付宝</span>扫一扫，即可进行扫码打赏哦</p>
+          </div>
+        </div>
       </div>
+
       <div class="nextinfo">
         <p id="nextContent">上一篇：无</p>
         <p id="previousContent">下一篇：无</p>
@@ -139,15 +189,41 @@
   </div>
 </article>
 <footer>
-  <p>版权所有：<a href="/blog/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
+  <div id="spig" class="spig" onclick="getSoup();">
+    <div id="message">加载中</div>
+    <div id="mumu" class="mumu" onclick=""></div>
+  </div>
+  <p><strong>版权所有：<a href="/blog/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></strong></p>
+  <p><strong>版权声明：本文为博主原创文章，著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处，附上博文链接！</strong></p>
+
 </footer>
 <a href="#" class="cd-top">Top</a>
 </body>
+
 <script type="text/javascript">
-  $(function () {
+
+    $(function () {
       getMsgByContentId();
-  });
-  // 获取评论
+    });
+
+    $(function(){
+        $(".pay_item").click(function(){
+            $(this).addClass('checked').siblings('.pay_item').removeClass('checked');
+            var dataid=$(this).attr('data-id');
+            $(".shang_payimg img").attr("src","../../static/blog/images/"+dataid+".jpg");
+            $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
+        });
+    });
+    function dashangToggle(){
+        $(".hide_box").fadeToggle();
+        $(".shang_box").fadeToggle();
+    }
+
+    window.onload=getWeather();
+    // 动态求换title
+    window.onload = changeTitle();
+
+        // 获取评论
   function getMsgByContentId() {
       var msgList;
       $.ajax({
@@ -169,14 +245,6 @@
           }
       }
   }
-  //显示
-//  function show() {
-//      if(document.getElementById('saypl').style.display ==="none"){
-//          document.getElementById('saypl').style.display ="";
-//      }else {
-//          document.getElementById('saypl').style.display ="none";
-//      }
-//  }
   // 判断是否已经展示form表单
   var Key;
   function display(obj) {
@@ -217,6 +285,7 @@
           }
       });
   }
+  // 评论完整度检测
   function CheckPl(){
       var obj = document.replyForm;
       // 检验邮箱是否为邮箱
@@ -263,9 +332,37 @@
           }
       }
   }
-
+  // 刷新验证码
   function changeCode() {
       document.getElementById("validCode").src ="/validCodeImg/"+Math.random();
+  }
+
+  // 点赞
+  function addPraise() {
+      var diggit;
+      $.ajax({
+          type: 'POST',
+          url:"/blog/praise",
+          dataType:'json',
+          async: false,
+          data:{"contentId":contentId},
+          success:function(json){
+              if(json.errorCode===0){
+                  diggit = json.data;
+                  var msg = confirm("感谢您的支持,是否愿意进行打赏？");
+                  if(msg){
+                      dashangToggle();
+                  }
+                  $(".diggit").html("赞："+diggit);
+              }else {
+                  var msg = confirm(json.errorMsg + "，是否愿意进行打赏？");
+                  if(msg){
+                      dashangToggle();
+                  }
+
+              }
+          }
+      });
   }
 
 

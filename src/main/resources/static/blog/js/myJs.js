@@ -50,3 +50,18 @@ function getContentType() {
         }
     });
 }
+
+
+// 更改标题
+function changeTitle() {
+    function c() {
+        document.title = document[a] ? '震惊！某码农居然居然做出....': d
+    }
+    var a = document.title;
+    var b = document.title;
+    var d = document.title;
+    typeof document.hidden !== 'undefined' ? (a = 'hidden', b = 'visibilitychange')
+        : typeof document.mozHidden !== 'undefined' ? (a = 'mozHidden', b = 'mozvisibilitychange')
+        : typeof document.webkitHidden !== 'undefined' && (a = 'webkitHidden', b = 'webkitvisibilitychange')
+    typeof document.addEventListener === 'undefined' && typeof document[a] === 'undefined' || document.addEventListener(b, c, !1)
+}

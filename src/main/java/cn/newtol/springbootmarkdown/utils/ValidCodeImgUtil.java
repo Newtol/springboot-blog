@@ -106,6 +106,9 @@ public class ValidCodeImgUtil {
         String str;
         // 获取数字,防止出现负数，所以num2小于num1
         Integer num1 = random.nextInt(100);
+        while(num1 == 0){
+            num1 = random.nextInt(100);
+        }
         Integer num2 = random.nextInt(num1);
         // 获取运算符号
         String ch = operatorNum[random.nextInt(2)];
@@ -177,7 +180,6 @@ public class ValidCodeImgUtil {
         //绘制算术表达式
         String[] strings = getString();
         drowString(g,strings[0]);
-
         g.dispose();
 
 
