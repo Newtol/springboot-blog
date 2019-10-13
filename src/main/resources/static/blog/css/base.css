@@ -1,18 +1,20 @@
 @charset "utf-8";
 /* css */
 * { margin: 0; padding: 0 }
-body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; background: #efefef; line-height: 1.5; }
+body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; background: #efefef; line-height: 1.5; cursor: url("https://www.newtol.cn/upload/cursor.png"), auto;}
 img { border: 0; display: block }
-ul, li { list-style: none; }
 a { text-decoration: none; color: #555 }
 a:hover { text-decoration: none; color: #000; }
 .clear { clear: both; }
 .blank { height: 20px; overflow: hidden; width: 100%; margin: auto; clear: both }
 .f_l { float: left }
 .f_r { float: right }
-article { width: 1000px; margin: 80px auto 0; overflow: hidden; zoom: 1; }
-aside { width: 30%; float: left; overflow: hidden; display: block; position: relative; z-index: 1 }
-main { overflow: hidden; width: 68%; float: right; display: block; }
+/*article { width: 1000px; margin: 80px auto 0; overflow: hidden; zoom: 1; }*/
+article { width: 95%;  margin: 80px auto 0;overflow: hidden; zoom: 1; }
+aside { width: 20%; float: left; overflow: hidden; display: block; position: relative; z-index: 1 }
+aside ul li{list-style-type: none}
+.contentList li{list-style-type: none}
+main { overflow: hidden; width: 75%; display: block; float: right}
 .container { width: 1000px; margin: auto }
 nav { width: 1000px; margin: auto }
 .logo { float: left; font-size: 22px }

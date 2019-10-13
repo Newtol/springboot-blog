@@ -2,7 +2,28 @@ $(function () {
     getContentType();
     getRecommandationList();
     getReadRankList();
-})
+    getFrindUrl();
+});
+
+
+
+// 获取友链
+function getFrindUrl() {
+    var friendUrlList;
+    $.ajax({
+        url:"../friendUrl",
+        dataType:'json',
+        async: false,
+        success:function(json){
+            friendUrlList = json.data;
+        }
+    });
+    for (var i in friendUrlList){
+        var a = "<a href='"+friendUrlList[i].url+"'>"+friendUrlList[i].name+"</a>";
+        $("#keyWord").append(a);
+
+    }
+}
 
 // 获取站长推荐
 function getRecommandationList() {

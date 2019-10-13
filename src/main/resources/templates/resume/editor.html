@@ -3,7 +3,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <head>
     <meta charset="utf-8" />
-    <title>Newtol_编写自己的简历</title>
+    <title>Newtol_Markdown在线编辑器</title>
     <!--头部样式-->
     <link href="../../static/blog/css/base.css" rel="stylesheet">
     <!--[if lt IE 9]>
@@ -29,24 +29,25 @@
         background-color:rgba(0,0,0,0.5);
         filter:alpha(opacity=50);
     }
+
 </style>
 <header class="header-navigation" id="header">
     <nav>
         <div class="logo"><a href="/">Newtol个人博客</a></div>
         <h2 id="mnavh"><span class="navicon"></span></h2>
         <ul id="starlist">
-            <li><a href="/blog/index">文章</a></li>
-            <li><a href="/blog/share">我的相册</a></li>
-            <li><a href="/blog/game">我的日记</a></li>
-            <li><a href="/blog/about">关于我</a></li>
-            <li><a href="/blog/gbook">留言&友链申请</a></li>
-            <li><a href="/editor">编辑md简历</a></li>
+            <li><a href="/index">文章</a></li>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/share">时间轴</a></li>
+            <li><a href="/game">开放API</a></li>
+            <li><a href="/gbook">留言&友链申请</a></li>
+            <li><a href="/editor">md在线编辑器</a></li>
         </ul>
     </nav>
 </header>
 <body>
 <div id="layout" style="margin-top: 70px;width: 90%;margin-left: 5%">
-    <form name="myForm" id = "myForm"method="post" action="http://localhost:8081/editor/myResume">
+    <form name="myForm" id = "myForm"method="post" action="../editor/myResume">
         <div style="width:100%">
             <input type="text"  name="title" placeholder="请输入简历名称" style="width: 85%;padding: 6px;border-radius: 4px">
             <select name="resumeType" id = "resumeType" style="width: 12%;border-radius: 4px;padding: 6px">
@@ -59,9 +60,8 @@
     </form>
 
 </div>
-
 <footer>
-    <p>版权所有：<a href="/blog/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
+    <p style="text-align: center">版权所有：<a href="/blog/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></p>
 </footer>
 <script src="../../static/editor/js/editor/jquery.min.js"></script>
 <script src="../../static/editor/js/editor/editormd.min.js"></script>
@@ -139,27 +139,27 @@
     });
     //    下载pdf
     function downloadPdf() {
-        $.ajax({
-            //几个参数需要注意一下
-            type: "POST",//方法类型
-            dataType: "json",//预期服务器返回的数据类型
-            url: "/editor/myResume" ,//url
-            data: $('#myForm').serialize(),
-            beforeSend:function(){
-                $("<div id=\"loading\"></div>").appendTo("body");
-            },
-            success: function (result) {
-                $("#loading").remove();
-                if(result.errorCode === 0){
-                    window.location.href=result.data;
-                }else {
-                    alert(result.errorMsg);
-                }
-            },
-            error : function() {
-                alert("服务器繁忙，请稍后再试！");
-            }
-        });
+       $.ajax({
+           //几个参数需要注意一下
+           type: "POST",//方法类型
+           dataType: "json",//预期服务器返回的数据类型
+           url: "/editor/myResume" ,//url
+           data: $('#myForm').serialize(),
+           beforeSend:function(){
+               $("<div id=\"loading\"></div>").appendTo("body");
+           },
+           success: function (result) {
+               $("#loading").remove();
+               if(result.errorCode === 0){
+                   window.location.href="download/"+result.data;
+               }else {
+                   alert(result.errorMsg);
+               }
+           },
+           error : function() {
+               alert("服务器繁忙，请稍后再试！");
+           }
+       });
     }
 </script>
 </body>

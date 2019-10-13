@@ -90,20 +90,23 @@ function maveMumu() {
 
 //    获取天气信息
 function getWeather() {
-    var weather;
-    $.ajax({
-        url:"../api/weather",
-        dataType:'json',
-        async: false,
-        success:function(json){
-            weather = json.data;
+    var x = window.sessionStorage.getItem("isFrist");
+    if(x != "1"){
+        var weather;
+        $.ajax({
+            url:"../api/weather",
+            dataType:'json',
+            async: false,
+            success:function(json){
+                weather = json.data;
+            }
+        });
+        if(weather == null){
+            weather = "努力奋斗吧，少年！";
         }
-    });
-    if(weather == null){
-        weather = "努力奋斗吧，少年！";
+        $("#message").html("<p style='width: 100%'>小新提醒您："+weather+"</p>");
+        setTimeout(function(){document.getElementById("message").style.display="none";},4000);
+        window.sessionStorage.setItem("isFrist","1");
     }
-
-    $("#message").html("<p style='width: 100%'>小新提醒您："+weather+"</p>");
-    setTimeout(function(){document.getElementById("message").style.display="none";},4000);
-
+    return;
 }

@@ -2,13 +2,13 @@ $(function () {
     // 复制增加版权信息
     document.oncopy = addLink;
 
-// 禁止右键菜单
+    // 禁止右键菜单
     document.oncontextmenu=stop;
 
-// 静止使用F12审查元素
+    // 静止使用F12审查元素
     document.onkeydown = banF12;
-});
 
+});
 
 function addLink() {
     var selection = window.getSelection();
@@ -35,9 +35,9 @@ function stop(){
 
 function banF12() {
     if(window.event && window.event.keyCode == 123) {
-        alert("F12被禁用");
         event.keyCode=0;
         event.returnValue=false;
+        alert("欢迎你访问Newtol个人博客，F12被禁用");
     }
     if(window.event && window.event.keyCode == 13) {
         window.event.keyCode = 505;

@@ -2,9 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8">
-    <title>首页_杨青个人博客 - 一个站在web前端设计之路的女技术员个人博客网站</title>
-    <meta name="keywords" content="个人博客,杨青个人博客,个人博客模板,杨青" />
-    <meta name="description" content="杨青个人博客，是一个站在web前端设计之路的女程序员个人网站，提供个人博客模板免费资源下载的个人原创网站。" />
+    <title>首页_时间轴</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="../../static/blog/css/base.css" rel="stylesheet">
     <link href="../../static/blog/css/index.css" rel="stylesheet">
@@ -13,8 +11,8 @@
     <script src="../../static/blog/js/mumu.js"></script>
     <script type="text/javascript" src="../../static/blog/js/comm.js"></script>
     <link rel="shortcut icon" href="../../static/favicon.ico" type="image/x-icon" />
-    <!--<script src="../../static/blog/js/safe.js"></script>-->
-
+    <script src="../../static/blog/js/safe.js"></script>
+    <script src="../../static/blog/js/mouse.js"></script>
     <script src="../../static/blog/js/myJs.js"></script>
     <!--[if lt IE 9]>
     <script src="../../static/blog/js/modernizr.js"></script>
@@ -31,97 +29,93 @@
         <div class="logo"><a href="/">Newtol个人博客</a></div>
         <h2 id="mnavh"><span class="navicon"></span></h2>
         <ul id="starlist">
-            <li><a href="/blog/index">文章</a></li>
-            <li><a href="/blog/about">关于我</a></li>
-            <li><a href="/blog/share">我的相册</a></li>
-            <li><a href="/blog/game">开放API</a></li>
-            <li><a href="/blog/gbook">留言&友链申请</a></li>
-            <li><a href="/editor">编辑md简历</a></li>
+            <li><a href="/index">文章</a></li>
+            <li><a href="/about">关于我</a></li>
+            <li><a href="/share">时间轴</a></li>
+            <li><a href="/game">开放API</a></li>
+            <li><a href="/gbook">留言&友链申请</a></li>
+            <li><a href="/editor">md在线编辑器</a></li>
         </ul>
     </nav>
 </header>
 <article>
+    <h2 class="top_title"  style="text-align: center"><span >Newtol博客时间轴</span></h2>
     <section id="cd-timeline" class="cd-container">
-        <div class="cd-timeline-block">
-            <div class="cd-timeline-img cd-picture">
-                <img src="../../static/blog/images/img/cd-icon-picture.svg" alt="Picture">
-            </div>
-
-            <div class="cd-timeline-content">
-                <h2>HTML5+CSS3实现的响应式垂直时间轴</h2>
-                <p>网页时间轴一般用于展示以时间为主线的事件，如企业网站常见的公司发展历程等。本文将给大家介绍一款基于HTML5和CSS3的漂亮的垂直时间轴，它可以响应页面布局，适用于HTML5开发的PC和移动手机WEB应用。</p>
-                <a href="http://www.helloweba.com/view-blog-285.html" class="cd-read-more" target="_blank">阅读全文</a>
-                <span class="cd-date">2015-01-06</span>
-            </div>
-        </div>
-        <div class="cd-timeline-block">
-            <div class="cd-timeline-img cd-movie">
-                <img src="../../static/blog/images/img/cd-icon-movie.svg" alt="Movie">
-            </div>
-
-            <div class="cd-timeline-content">
-                <h2>jQuery+PHP动态数字展示效果</h2>
-                <p>我们在一些应用中需要动态展示数据，比如当前在线人数，当前交易总额，当前汇率等等，前端页面需要实时刷新获取最新数据。本文将结合实例给大家介绍使用jQuery和PHP来实现动态数字展示效果。</p>
-                <a href="http://www.helloweba.com/view-blog-284.html" class="cd-read-more" target="_blank">阅读全文</a>
-                <span class="cd-date">2014-12-25</span>
-            </div>
-        </div>
-        <div class="cd-timeline-block">
-            <div class="cd-timeline-img cd-picture">
-                <img src="../../static/blog/images/img/cd-icon-picture.svg" alt="Picture">
-            </div>
-
-            <div class="cd-timeline-content">
-                <h2>PHP操作Session和Cookie</h2>
-                <p>我们跟踪用户信息时需要用到Session和Cookie，比如用户登录验证、记录用户浏览历史，存储购物车数据，限制用户会话有效时间等。今天我们来了解下PHP是如何操作Session和Cookie的。</p>
-                <a href="http://www.helloweba.com/view-blog-283.html" class="cd-read-more" target="_blank">阅读全文</a>
-                <span class="cd-date">2014-12-20</span>
-            </div>
-        </div>
-        <div class="cd-timeline-block">
-            <div class="cd-timeline-img cd-movie">
-                <img src="../../static/blog/images/img/cd-icon-movie.svg" alt="Movie">
-            </div>
-
-            <div class="cd-timeline-content">
-                <h2>jQuery数字加减插件</h2>
-                <p>我们在网上购物提交订单时，在网页上一般会有一个选择数量的控件，要求买家选择购买商品的件数，开发者会把该控件做成可以通过点击实现加减等微调操作，当然也可以直接输入数字件数。本文将介绍常见的几种使用spinner数字微调器来实现数字加减的功能的方法。</p>
-                <a href="http://www.helloweba.com/view-blog-282.html" class="cd-read-more" target="_blank">阅读全文</a>
-                <span class="cd-date">2014-12-14</span>
-            </div>
-        </div>
-        <div class="cd-timeline-block">
-            <div class="cd-timeline-img cd-movie">
-                <img src="../../static/blog/images/img/cd-icon-location.svg" alt="Location">
-            </div>
-
-            <div class="cd-timeline-content">
-                <h2>收集整理的非常有用的PHP函数</h2>
-                <p>项目中经常会需要一些让人头疼的函数，作为开发者应该整理一个自己的函数库，在需要之时复制过来即可。本文作者收集整理数十个PHP项目中常用的函数，保证能正常运行，你只要复制粘贴到你项目中即可。</p>
-                <a href="http://www.helloweba.com/view-blog-281.html" class="cd-read-more" target="_blank">阅读全文</a>
-                <span class="cd-date">2014-12-05</span>
-            </div>
-        </div>
     </section>
 </article>
 
 <footer>
     <div id="spig" class="spig" onclick="getSoup();">
-        <div id="message">加载中</div>
+        <div id="message">点我有惊喜</div>
         <div id="mumu" class="mumu" onclick=""></div>
     </div>
-    <p><strong>版权所有：<a href="/blog/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></strong></p>
+    <p><strong>版权所有：<a href="/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></strong></p>
     <p><strong>版权声明：本文为博主原创文章，著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处，附上博文链接！</strong></p>
 </footer>
 <a href="#" class="cd-top">Top</a>
 </body>
 
-
 <script type="text/javascript">
+    var page=1;
+    var totalpage = 10000;
+    $(function () {
+        getTimeline(page);
+        isBottom();
+    });
     window.onload=getWeather();
     // 动态求换title
     window.onload = changeTitle();
+    onload = myMouse();
 
+
+    // 判断是否达到底部，如果是则获取数据
+    function isBottom() {
+        //滚动条距底部的距离
+        var BOTTOM_OFFSET = 20;
+        $(document).ready(function () {
+            $(window).scroll(function () {
+                var $currentWindow = $(window);
+                //当前窗口的高度
+                var windowHeight = $currentWindow.height();
+                //当前滚动条从上往下滚动的距离
+                var scrollTop = $currentWindow.scrollTop();
+                //当前文档的高度
+                var docHeight = $(document).height();
+                //当 滚动条距底部的距离 + 滚动条滚动的距离 >= 文档的高度 - 窗口的高度
+                //换句话说：（滚动条滚动的距离 + 窗口的高度 = 文档的高度）  这个是基本的公式
+                if ((BOTTOM_OFFSET + scrollTop) >= docHeight - windowHeight) {
+                    getTimeline();
+                }
+            });
+        });
+    }
+
+    // 获取时间轴数据
+    function getTimeline() {
+        var timelineList;
+        if (page > totalpage) {
+            return false;
+        } else {
+            $.ajax({
+                url: "/timeline?page=" + page,
+                dataType: 'json',
+                async: false,
+                success: function (json) {
+                    timelineList = json.data.content;
+                    totalpage = json.data.totalPages;
+                    for (var i in timelineList) {
+                        var div = "<div class=\"cd-timeline-block\"><div class=\"cd-timeline-img cd-movie\"><img src=\"../../static/blog/images/img/cd-icon-location.svg\" alt=\"Location\"></div>"
+                            + "<div class=\"cd-timeline-content\"><h3>" + timelineList[i].title + "</h3>"
+                            + "<p>" + timelineList[i].content + "</p>"
+                            + "<span class=\"cd-date\">" + timelineList[i].updateTime
+                            + "</span></div></div>";
+                        $(div).appendTo(document.getElementById("cd-timeline"));
+                    }
+                    page = page+1;
+                }
+            });
+        }
+    }
 </script>
 </html>
 

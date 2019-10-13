@@ -21,35 +21,6 @@ body {
 }
 
 
-
-img {
-    max-width: 100%;
-}
-
-/* --------------------------------
-
-Modules - reusable parts of our design
-
--------------------------------- */
-.cd-container {
-    /* this class is used to give a max-width to the element it is applied to, and center it horizontally when it reaches that max-width */
-    width: 90%;
-    max-width: 1170px;
-    margin: 0 auto;
-}
-.cd-container::after {
-    /* clearfix */
-    content: '';
-    display: table;
-    clear: both;
-}
-
-/* --------------------------------
-
-Main components
-
--------------------------------- */
-
 #cd-timeline {
     position: relative;
     padding: 2em 0;
@@ -123,14 +94,9 @@ Main components
     margin-left: -12px;
     margin-top: -12px;
 }
-.cd-timeline-img.cd-picture {
-    background: #75ce66;
-}
+
 .cd-timeline-img.cd-movie {
     background: #c03b44;
-}
-.cd-timeline-img.cd-location {
-    background: #f0ca45;
 }
 @media only screen and (min-width: 1170px) {
     .cd-timeline-img {
@@ -166,7 +132,7 @@ Main components
     display: table;
     clear: both;
 }
-.cd-timeline-content h2 {
+.cd-timeline-content h3 {
     color: #303e49;
 }
 .cd-timeline-content p, .cd-timeline-content .cd-read-more, .cd-timeline-content .cd-date {
@@ -207,7 +173,7 @@ a.cd-read-more:hover{text-decoration:none; background-color: #424242;  }
     border-right: 7px solid white;
 }
 @media only screen and (min-width: 768px) {
-    .cd-timeline-content h2 {
+    .cd-timeline-content h3 {
         font-size: 20px;
         font-size: 1.25rem;
     }

@@ -3,7 +3,7 @@ $(function () {
     contentId = getContentId();
     getContent(contentId);
     getPraise();
-})
+});
 // 从url获取文章ID
 function getContentId() {
     var contentId;

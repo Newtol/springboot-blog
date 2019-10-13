@@ -23,8 +23,9 @@
   <script src="../../static/blog/js/info.js"></script>
   <script src="../../static/blog/js/mumu.js"></script>
   <script src="../../static/blog/js/safe.js"></script>
+  <!--<script src="../../static/blog/js/safe.js"></script>-->
   <link rel="shortcut icon" href="../../static/favicon.ico" type="image/x-icon" />
-
+  <script src="../../static/blog/js/mouse.js"></script>
   <link href="../../static/blog/css/base.css" rel="stylesheet">
   <link href="../../static/blog/css/index.css" rel="stylesheet">
   <link href="../../static/blog/css/info.css" rel="stylesheet">
@@ -62,26 +63,17 @@
     <div class="logo"><a href="/">Newtol个人博客</a></div>
     <h2 id="mnavh"><span class="navicon"></span></h2>
     <ul id="starlist">
-      <li><a href="/blog/index">文章</a></li>
-      <li><a href="/blog/about">关于我</a></li>
-      <li><a href="/blog/share">我的相册</a></li>
-      <li><a href="/blog/game">开放API</a></li>
-      <li><a href="/blog/gbook">留言&友链申请</a></li>
-      <li><a href="/editor">编辑md简历</a></li>
+      <li><a href="/index">文章</a></li>
+      <li><a href="/about">关于我</a></li>
+      <li><a href="/share">时间轴</a></li>
+      <li><a href="/game">开放API</a></li>
+      <li><a href="/gbook">留言&友链申请</a></li>
+      <li><a href="/editor">md在线编辑器</a></li>
     </ul>
   </nav>
 </header>
 <article>
   <aside class="l_box">
-    <div class="search">
-      <form action="/" method="post" name="searchform" id="searchform">
-        <input name="keyboard" id="keyboard" class="input_text" value="请输入关键字词" style="color: rgb(153, 153, 153);" onfocus="if(value=='请输入关键字词'){this.style.color='#000';value=''}" onblur="if(value==''){this.style.color='#999';value='请输入关键字词'}" type="text">
-        <input name="show" value="title" type="hidden">
-        <input name="tempid" value="1" type="hidden">
-        <input name="tbname" value="news" type="hidden">
-        <input name="Submit" class="input_submit" value="搜索" type="submit" >
-      </form>
-    </div>
     <div class="guanzhu">
       <h2>关注我 有惊喜</h2>
       <ul>
@@ -101,10 +93,10 @@
       <h2>阅读排行</h2>
       <ul id="readRankList"></ul>
     </div>
-    <!--<div class="cloud">-->
-      <!--<h2>文章分类</h2>-->
-      <!--<ul id="keyWord"></ul>-->
-    <!--</div>-->
+    <div class="cloud">
+      <h2>友情链接</h2>
+      <ul id="keyWord"></ul>
+    </div>
   </aside>
   <main>
     <div class="infosbox" >
@@ -190,10 +182,10 @@
 </article>
 <footer>
   <div id="spig" class="spig" onclick="getSoup();">
-    <div id="message">加载中</div>
+    <div id="message">点我有惊喜</div>
     <div id="mumu" class="mumu" onclick=""></div>
   </div>
-  <p><strong>版权所有：<a href="/blog/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></strong></p>
+  <p><strong>版权所有：<a href="/index" target="_blank">Newtol个人博客</a> <a href="/">黔ICP备17003873号</a></strong></p>
   <p><strong>版权声明：本文为博主原创文章，著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处，附上博文链接！</strong></p>
 
 </footer>
@@ -214,17 +206,22 @@
             $("#shang_pay_txt").text(dataid=="alipay"?"支付宝":"微信");
         });
     });
+
     function dashangToggle(){
         $(".hide_box").fadeToggle();
         $(".shang_box").fadeToggle();
     }
 
     window.onload=getWeather();
-    // 动态求换title
+
+    // 动态更换页面title
     window.onload = changeTitle();
 
-        // 获取评论
-  function getMsgByContentId() {
+    // 增加鼠标点击特效
+    onload = myMouse();
+
+    // 获取评论
+   function getMsgByContentId() {
       var msgList;
       $.ajax({
           url:"../msg?contentId="+contentId,
@@ -364,7 +361,5 @@
           }
       });
   }
-
-
 </script>
 </html>
