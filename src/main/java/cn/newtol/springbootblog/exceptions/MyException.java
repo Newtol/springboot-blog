@@ -17,5 +17,4 @@ public class MyException extends RuntimeException {
         super(resultEnum.getErrorMsg());
         this.errorCode = resultEnum.getErrorCode();
     }
-
 }

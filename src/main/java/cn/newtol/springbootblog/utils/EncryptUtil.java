@@ -13,10 +13,6 @@ import java.util.Date;
  */
 public class EncryptUtil {
     private static final char[] digit = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'};
-
-    /**
-     * 此类不需要实例化
-     */
     private EncryptUtil() {
     }
 
@@ -51,6 +47,7 @@ public class EncryptUtil {
         }
         return rs;
     }
+
     /**
      * 将byte数组变为16进制对应的字符串
      * @param byteArray byte数组
@@ -73,13 +70,6 @@ public class EncryptUtil {
 
     }
 
-    public static void main(String[] args) {
-        Date today=new Date();
-        SimpleDateFormat f=new SimpleDateFormat("yyyyMMddHHmms");
-        String time=f.format(today);
-        System.out.println(time);
-    }
-
     //md5加密
     public static String md5(String data) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
@@ -98,7 +88,4 @@ public class EncryptUtil {
         }
         return buf.toString();
     }
-
-
-
 }

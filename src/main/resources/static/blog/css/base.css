@@ -3,7 +3,7 @@
 * { margin: 0; padding: 0 }
 body { font: 15px "Microsoft YaHei", Arial, Helvetica, sans-serif; color: #555; background: #efefef; line-height: 1.5; cursor: url("https://www.newtol.cn/upload/cursor.png"), auto;}
 img { border: 0; display: block }
-a { text-decoration: none; color: #555 }
+a { text-decoration: none; color: #555 ;cursor: url("https://www.newtol.cn/upload/cursor2.png"), auto;}
 a:hover { text-decoration: none; color: #000; }
 .clear { clear: both; }
 .blank { height: 20px; overflow: hidden; width: 100%; margin: auto; clear: both }

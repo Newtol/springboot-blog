@@ -22,14 +22,22 @@ import java.util.Map;
 public class WeatherServiceImpl implements WeatherService{
     @Value("${defaultKey.WEATHER_URL}")
     private String WEATHER_URL;
+
+
+    @Value("${defaultKey.WEATHER_APPID}")
+    private String appID;
+
+    @Value("${defaultKey.WEATHER_APPSECRET}")
+    private String appSecret;
+
     @Override
     public ResultVO getWeatherByIp(String ip) throws Exception {
         // 封装请求参数
         Map<String,String> map= new HashMap<>(2);
         map.put("version","v6");
         map.put("ip",ip);
-        map.put("appid","19888371");
-        map.put("appsecret","gn9Hze8e");
+        map.put("appid",appID);
+        map.put("appsecret",appSecret);
         HttpClientResult httpClientResult = HttpClientUtil.doGet(WEATHER_URL,map);
         WeatherInfo weatherInfo = JSONObject.parseObject(httpClientResult.getContent(), WeatherInfo.class);
         return ResultUtil.success(weatherInfo.toString());

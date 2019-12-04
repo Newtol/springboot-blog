@@ -17,4 +17,5 @@ public interface WeatherService {
      * @return
      */
     ResultVO getWeatherByIp(String ip) throws Exception;
+
 }

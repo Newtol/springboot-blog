@@ -92,11 +92,8 @@ public class ValidCodeImgUtil {
         // 设置字符串字体
         g.setFont(getFont());
         g.setColor(getRandColor());
-
         g.translate(random.nextInt(3), random.nextInt(3));
         g.drawString(str, 13 , 16);
-
-
     }
 
     /**
@@ -132,9 +129,6 @@ public class ValidCodeImgUtil {
                 return num + num2;
             case "-":
                 return num - num2;
-            // 乘法难以计算，舍弃
-//            case "x":
-//                return  num * num2;
             default:
                 return null;
         }

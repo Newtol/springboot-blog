@@ -4,6 +4,9 @@ defaultKey:
    CONTENT_READNUM: cn:newtol:springbootmarkdown:blog:content:readNum
    WEATHER_URL: https://www.tianqiapi.com/api/
    SOUP_KEY: cn:newtol:springbootmarkdown:api:soupKey
+   WEATHER_APPID: 19888371
+   WEATHER_APPSECRET: 2BpJ9PC6
+
 
 
 
@@ -36,7 +39,7 @@ spring:
   # mysql数据库配置连接
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://139.199.116.100:8878/mywebsites?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
+      url: jdbc:mysql://139.199.116.100:8878/mywebsites?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
       username: root
       password: rhw13312431962
   jpa:
