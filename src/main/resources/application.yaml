@@ -39,9 +39,9 @@ spring:
   # mysql数据库配置连接
   datasource:
       driver-class-name: com.mysql.cj.jdbc.Driver
-      url: jdbc:mysql://139.199.116.100:8878/mywebsites?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
-      username: root
-      password: rhw13312431962
+      url: jdbc:mysql://127.0.0.1:3306/mywebsites?useSSL=false&useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai&autoReconnect=true
+      username: xxxxx
+      password: xxxxxxx
   jpa:
       hibernate:
         ddl-auto: update
